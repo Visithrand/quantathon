@@ -1,0 +1,14 @@
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/repository/UserRepository.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/model/UserProgress.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/repository/ExerciseRepository.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/repository/UserProgressRepository.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/config/WebConfig.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/service/UserService.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/controller/SpeechAnalysisController.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/controller/UserController.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/SpeechTherapyApplication.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/config/SecurityConfig.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/model/Exercise.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/service/ProgressService.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/service/SpeechAnalysisService.java
+/home/runner/workspace/backend/src/main/java/com/speechtherapy/model/User.java

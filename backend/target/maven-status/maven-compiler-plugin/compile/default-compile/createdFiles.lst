@@ -1,0 +1,13 @@
+com/speechtherapy/service/ProgressService.class
+com/speechtherapy/repository/UserProgressRepository.class
+com/speechtherapy/controller/SpeechAnalysisController.class
+com/speechtherapy/service/SpeechAnalysisService.class
+com/speechtherapy/config/WebConfig.class
+com/speechtherapy/SpeechTherapyApplication.class
+com/speechtherapy/model/User.class
+com/speechtherapy/repository/UserRepository.class
+com/speechtherapy/controller/UserController.class
+com/speechtherapy/service/UserService.class
+com/speechtherapy/model/UserProgress.class
+com/speechtherapy/model/Exercise.class
+com/speechtherapy/repository/ExerciseRepository.class

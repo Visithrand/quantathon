@@ -1,8 +1,8 @@
-modules = ["python-3.11"]
+modules = ["python-3.11", "nodejs-20", "python3"]
 
 [nix]
 channel = "stable-25_05"
-packages = ["glibcLocales"]
+packages = ["cairo", "ffmpeg-full", "freetype", "ghostscript", "glibcLocales", "gobject-introspection", "gtk3", "libsndfile", "libxcrypt", "pkg-config", "qhull", "tcl", "tk", "xsimd", "jdk17", "maven"]
 
 [deployment]
 deploymentTarget = "autoscale"
@@ -18,20 +18,56 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Speech Therapy App"
-
-[[workflows.workflow]]
-name = "Speech Therapy App"
-author = "agent"
+args = "React Frontend"
 
 [[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "streamlit run app.py --server.port 5000"
-waitForPort = 5000
+task = "workflow.run"
+args = "Spring Boot Backend"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "Python NLP Service"
+
+[[workflows.workflow]]
+name = "React Frontend"
+author = "agent"
 
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd frontend && python -m http.server 5000"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Spring Boot Backend"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd backend && ./mvnw spring-boot:run"
+waitForPort = 8080
+
+[workflows.workflow.metadata]
+outputType = "console"
+
+[[workflows.workflow]]
+name = "Python NLP Service"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "cd nlp_service && python speech_analyzer.py"
+waitForPort = 8081
+
+[workflows.workflow.metadata]
+outputType = "console"
+
 [[ports]]
 localPort = 5000
 externalPort = 80
+
+[[ports]]
+localPort = 8080
+externalPort = 8080

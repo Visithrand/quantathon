@@ -1,0 +1,352 @@
+{
+  "word_exercises": {
+    "Basic Vocabulary": [
+      {
+        "word": "hello",
+        "phonetic": "həˈloʊ",
+        "meaning": "A greeting used when meeting someone",
+        "example_sentence": "Hello, how are you today?",
+        "difficulty": "easy"
+      },
+      {
+        "word": "thank",
+        "phonetic": "θæŋk",
+        "meaning": "To express gratitude",
+        "example_sentence": "Thank you for your help.",
+        "difficulty": "easy"
+      },
+      {
+        "word": "water",
+        "phonetic": "ˈwɔːtər",
+        "meaning": "A clear liquid essential for life",
+        "example_sentence": "Please bring me a glass of water.",
+        "difficulty": "easy"
+      },
+      {
+        "word": "please",
+        "phonetic": "pliːz",
+        "meaning": "Used to make a polite request",
+        "example_sentence": "Please close the door.",
+        "difficulty": "easy"
+      },
+      {
+        "word": "today",
+        "phonetic": "təˈdeɪ",
+        "meaning": "The current day",
+        "example_sentence": "Today is a beautiful day.",
+        "difficulty": "easy"
+      }
+    ],
+    "Common Actions": [
+      {
+        "word": "walking",
+        "phonetic": "ˈwɔːkɪŋ",
+        "meaning": "Moving on foot at a regular pace",
+        "example_sentence": "I enjoy walking in the park.",
+        "difficulty": "medium"
+      },
+      {
+        "word": "reading",
+        "phonetic": "ˈriːdɪŋ",
+        "meaning": "Looking at written words and understanding them",
+        "example_sentence": "Reading books expands your knowledge.",
+        "difficulty": "medium"
+      },
+      {
+        "word": "speaking",
+        "phonetic": "ˈspiːkɪŋ",
+        "meaning": "Talking or expressing thoughts verbally",
+        "example_sentence": "Speaking clearly is important for communication.",
+        "difficulty": "medium"
+      },
+      {
+        "word": "listening",
+        "phonetic": "ˈlɪsənɪŋ",
+        "meaning": "Paying attention to sound or speech",
+        "example_sentence": "Listening carefully helps you understand better.",
+        "difficulty": "medium"
+      },
+      {
+        "word": "thinking",
+        "phonetic": "ˈθɪŋkɪŋ",
+        "meaning": "Using your mind to consider or reason",
+        "example_sentence": "Thinking before you speak is wise.",
+        "difficulty": "medium"
+      }
+    ],
+    "Challenging Words": [
+      {
+        "word": "throughout",
+        "phonetic": "θruːˈaʊt",
+        "meaning": "In every part of; during the entire time",
+        "example_sentence": "It rained throughout the entire day.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "strength",
+        "phonetic": "streŋθ",
+        "meaning": "Physical power or mental resilience",
+        "example_sentence": "She showed great strength during difficult times.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "breathe",
+        "phonetic": "briːð",
+        "meaning": "To take air into the lungs and expel it",
+        "example_sentence": "Remember to breathe deeply and relax.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "clothes",
+        "phonetic": "kloʊðz",
+        "meaning": "Items worn to cover the body",
+        "example_sentence": "She bought new clothes for the interview.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "months",
+        "phonetic": "mʌnθs",
+        "meaning": "Periods of time, typically 30-31 days",
+        "example_sentence": "Summer lasts for three months.",
+        "difficulty": "hard"
+      }
+    ],
+    "Professional Terms": [
+      {
+        "word": "communication",
+        "phonetic": "kəˌmjuːnɪˈkeɪʃən",
+        "meaning": "The exchange of information between people",
+        "example_sentence": "Good communication skills are essential in business.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "presentation",
+        "phonetic": "ˌpriːzenˈteɪʃən",
+        "meaning": "A formal talk given to an audience",
+        "example_sentence": "The presentation was informative and well-structured.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "pronunciation",
+        "phonetic": "prəˌnʌnsiˈeɪʃən",
+        "meaning": "The way words are spoken",
+        "example_sentence": "Clear pronunciation helps others understand you better.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "articulation",
+        "phonetic": "ɑːrˌtɪkjəˈleɪʃən",
+        "meaning": "The clear expression of thoughts in speech",
+        "example_sentence": "Her articulation improved with speech therapy practice.",
+        "difficulty": "hard"
+      },
+      {
+        "word": "vocabulary",
+        "phonetic": "vəˈkæbjəˌleri",
+        "meaning": "The words used in a particular language",
+        "example_sentence": "Reading regularly helps expand your vocabulary.",
+        "difficulty": "hard"
+      }
+    ]
+  },
+  "sentence_exercises": {
+    "Daily Conversations": [
+      {
+        "text": "How are you feeling today?",
+        "focus": "Question intonation and clear articulation",
+        "difficulty": "easy",
+        "context": "Greeting and checking on someone's well-being"
+      },
+      {
+        "text": "What time does the store close?",
+        "focus": "WH-question intonation and consonant clusters",
+        "difficulty": "easy",
+        "context": "Asking for information about business hours"
+      },
+      {
+        "text": "I would like to make a reservation.",
+        "focus": "Polite request structure and clear pronunciation",
+        "difficulty": "medium",
+        "context": "Making arrangements at a restaurant or hotel"
+      },
+      {
+        "text": "Could you please speak more slowly?",
+        "focus": "Polite request and rhythm control",
+        "difficulty": "medium",
+        "context": "Asking someone to adjust their speaking pace"
+      }
+    ],
+    "Professional Situations": [
+      {
+        "text": "I am pleased to meet you.",
+        "focus": "Formal register and clear vowel sounds",
+        "difficulty": "medium",
+        "context": "Professional introduction"
+      },
+      {
+        "text": "Let me schedule a meeting for next week.",
+        "focus": "Complex sentence structure and stress patterns",
+        "difficulty": "medium",
+        "context": "Business planning and coordination"
+      },
+      {
+        "text": "The project deadline has been extended until Friday.",
+        "focus": "Information delivery and word stress",
+        "difficulty": "hard",
+        "context": "Workplace communication about timelines"
+      },
+      {
+        "text": "I appreciate your feedback on the presentation.",
+        "focus": "Gratitude expression and professional tone",
+        "difficulty": "hard",
+        "context": "Acknowledging input from colleagues"
+      }
+    ],
+    "Storytelling Practice": [
+      {
+        "text": "Once upon a time, there was a small village.",
+        "focus": "Narrative tone and pacing",
+        "difficulty": "medium",
+        "context": "Beginning a story with traditional opening"
+      },
+      {
+        "text": "The weather was perfect for our outdoor adventure.",
+        "focus": "Descriptive language and expression",
+        "difficulty": "medium",
+        "context": "Setting scene for a personal narrative"
+      },
+      {
+        "text": "Suddenly, everything changed in an unexpected way.",
+        "focus": "Dramatic emphasis and emotional expression",
+        "difficulty": "hard",
+        "context": "Creating tension in storytelling"
+      }
+    ]
+  },
+  "conversation_scenarios": [
+    {
+      "title": "At the Doctor's Office",
+      "difficulty": "medium",
+      "context": "Medical appointment conversation",
+      "dialogue": [
+        {
+          "speaker": "Doctor",
+          "text": "Good morning! What brings you in today?",
+          "expected_response": "Good morning, Doctor. I've been having some pain in my shoulder."
+        },
+        {
+          "speaker": "Doctor",
+          "text": "How long have you been experiencing this pain?",
+          "expected_response": "It started about a week ago after I was gardening."
+        },
+        {
+          "speaker": "Doctor",
+          "text": "On a scale of 1 to 10, how would you rate the pain?",
+          "expected_response": "I'd say it's about a 6 or 7 out of 10."
+        }
+      ]
+    },
+    {
+      "title": "Job Interview",
+      "difficulty": "hard",
+      "context": "Professional interview setting",
+      "dialogue": [
+        {
+          "speaker": "Interviewer",
+          "text": "Can you tell me about your previous work experience?",
+          "expected_response": "I have five years of experience in customer service, where I developed strong communication skills."
+        },
+        {
+          "speaker": "Interviewer",
+          "text": "What do you consider your greatest strength?",
+          "expected_response": "I believe my greatest strength is my ability to work well with people from diverse backgrounds."
+        },
+        {
+          "speaker": "Interviewer",
+          "text": "Why are you interested in this position?",
+          "expected_response": "I'm excited about this opportunity because it aligns with my career goals and values."
+        }
+      ]
+    },
+    {
+      "title": "Restaurant Ordering",
+      "difficulty": "easy",
+      "context": "Dining out conversation",
+      "dialogue": [
+        {
+          "speaker": "Server",
+          "text": "Welcome! Are you ready to order?",
+          "expected_response": "Yes, I'd like the grilled chicken with vegetables, please."
+        },
+        {
+          "speaker": "Server",
+          "text": "How would you like that cooked?",
+          "expected_response": "Medium well, please."
+        },
+        {
+          "speaker": "Server",
+          "text": "What would you like to drink?",
+          "expected_response": "I'll have a glass of water with lemon, thank you."
+        }
+      ]
+    }
+  ],
+  "tongue_twisters": [
+    {
+      "text": "She sells seashells by the seashore",
+      "difficulty": "easy",
+      "focus": "S and SH sounds",
+      "tip": "Focus on the difference between 'S' and 'SH' sounds"
+    },
+    {
+      "text": "Peter Piper picked a peck of pickled peppers",
+      "difficulty": "medium",
+      "focus": "P sound repetition",
+      "tip": "Keep lips firm and explosive for clear P sounds"
+    },
+    {
+      "text": "How much wood would a woodchuck chuck if a woodchuck could chuck wood?",
+      "difficulty": "medium",
+      "focus": "W and CH sounds",
+      "tip": "Maintain clear W sound at the beginning and crisp CH sounds"
+    },
+    {
+      "text": "Red leather, yellow leather, red leather, yellow leather",
+      "difficulty": "hard",
+      "focus": "L and R distinction",
+      "tip": "Pay careful attention to tongue position for L and R sounds"
+    },
+    {
+      "text": "The sixth sick sheik's sixth sheep's sick",
+      "difficulty": "very hard",
+      "focus": "Complex consonant clusters",
+      "tip": "Break down into smaller segments and practice slowly first"
+    },
+    {
+      "text": "Unique New York, unique New York, you know you need unique New York",
+      "difficulty": "very hard",
+      "focus": "Multiple challenging sound combinations",
+      "tip": "Focus on clear vowel sounds and precise articulation"
+    }
+  ],
+  "reading_passages": [
+    {
+      "title": "The Importance of Clear Speech",
+      "difficulty": "easy",
+      "text": "Clear speech helps people understand each other better. When we speak clearly, we can share our ideas and feelings more effectively. Practice makes our speech better over time.",
+      "focus": "Basic pronunciation and pacing"
+    },
+    {
+      "title": "Benefits of Speech Therapy",
+      "difficulty": "medium",
+      "text": "Speech therapy helps people improve their communication skills through various exercises and techniques. Regular practice with a qualified therapist can lead to significant improvements in pronunciation, fluency, and confidence.",
+      "focus": "Professional vocabulary and complex sentences"
+    },
+    {
+      "title": "The Art of Communication",
+      "difficulty": "hard",
+      "text": "Effective communication encompasses not only the words we choose but also how we deliver them. The rhythm, intonation, and clarity of our speech contribute significantly to how our message is received and understood by others.",
+      "focus": "Advanced vocabulary and expressive reading"
+    }
+  ]
+}

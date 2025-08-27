@@ -1,0 +1,489 @@
+{
+  "vowels": [
+    {
+      "symbol": "iː",
+      "description": "Long EE sound as in 'see'",
+      "difficulty": "beginner",
+      "example_words": ["see", "bee", "tree", "free", "agree"],
+      "tips": [
+        "Keep tongue high and forward in mouth",
+        "Stretch the sound longer than short 'i'",
+        "Smile slightly while saying this sound"
+      ],
+      "common_errors": ["Shortening the vowel", "Adding extra sounds at the end"],
+      "mouth_position": "High front, lips slightly spread"
+    },
+    {
+      "symbol": "ɪ",
+      "description": "Short I sound as in 'bit'",
+      "difficulty": "beginner",
+      "example_words": ["bit", "sit", "win", "big", "quick"],
+      "tips": [
+        "Keep tongue slightly lower than for 'ee' sound",
+        "Make it shorter and more relaxed",
+        "Don't stretch the sound"
+      ],
+      "common_errors": ["Confusing with 'ee' sound", "Making it too long"],
+      "mouth_position": "High front, more relaxed than /iː/"
+    },
+    {
+      "symbol": "e",
+      "description": "Short E sound as in 'bed'",
+      "difficulty": "beginner",
+      "example_words": ["bed", "red", "pen", "ten", "help"],
+      "tips": [
+        "Open mouth more than for 'i' sounds",
+        "Tongue is in middle-front position",
+        "Sound should be clear and short"
+      ],
+      "common_errors": ["Making it too long", "Confusing with 'a' sounds"],
+      "mouth_position": "Mid front, moderately open"
+    },
+    {
+      "symbol": "æ",
+      "description": "Short A sound as in 'cat'",
+      "difficulty": "intermediate",
+      "example_words": ["cat", "bat", "hand", "man", "happy"],
+      "tips": [
+        "Open mouth wider than for 'e' sound",
+        "Tongue is low and front",
+        "This is a bright, clear sound"
+      ],
+      "common_errors": ["Not opening mouth wide enough", "Confusing with other 'a' sounds"],
+      "mouth_position": "Low front, mouth quite open"
+    },
+    {
+      "symbol": "ɑː",
+      "description": "Long A sound as in 'father'",
+      "difficulty": "intermediate",
+      "example_words": ["father", "car", "park", "heart", "calm"],
+      "tips": [
+        "Open mouth very wide",
+        "Tongue is low and back",
+        "Make the sound long and deep"
+      ],
+      "common_errors": ["Not making it long enough", "Tongue position too forward"],
+      "mouth_position": "Low back, mouth wide open"
+    },
+    {
+      "symbol": "ɔː",
+      "description": "Long O sound as in 'thought'",
+      "difficulty": "intermediate",
+      "example_words": ["thought", "caught", "law", "saw", "because"],
+      "tips": [
+        "Round lips into an 'o' shape",
+        "Tongue is low and back",
+        "Make it a long, rounded sound"
+      ],
+      "common_errors": ["Not rounding lips enough", "Making it too short"],
+      "mouth_position": "Low back, lips rounded"
+    },
+    {
+      "symbol": "ʊ",
+      "description": "Short U sound as in 'book'",
+      "difficulty": "intermediate",
+      "example_words": ["book", "good", "put", "could", "would"],
+      "tips": [
+        "Round lips slightly",
+        "Tongue is high and back",
+        "Shorter than long 'oo' sound"
+      ],
+      "common_errors": ["Confusing with 'oo' sound", "Not rounding lips"],
+      "mouth_position": "High back, lips slightly rounded"
+    },
+    {
+      "symbol": "uː",
+      "description": "Long OO sound as in 'moon'",
+      "difficulty": "beginner",
+      "example_words": ["moon", "food", "blue", "true", "school"],
+      "tips": [
+        "Round lips into tight 'o' shape",
+        "Tongue is high and back",
+        "Make it long and deep"
+      ],
+      "common_errors": ["Not making it long enough", "Lips not rounded enough"],
+      "mouth_position": "High back, lips strongly rounded"
+    }
+  ],
+  "consonants": [
+    {
+      "symbol": "p",
+      "description": "P sound as in 'pen'",
+      "difficulty": "beginner",
+      "example_words": ["pen", "cup", "apple", "happy", "stop"],
+      "tips": [
+        "Press lips together firmly",
+        "Release with a small puff of air",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Not enough air release", "Adding extra sounds"],
+      "mouth_position": "Both lips pressed together"
+    },
+    {
+      "symbol": "b",
+      "description": "B sound as in 'book'",
+      "difficulty": "beginner",
+      "example_words": ["book", "cab", "rabbit", "number", "job"],
+      "tips": [
+        "Press lips together like 'p'",
+        "Use your voice (vocal cords vibrate)",
+        "Less air release than 'p'"
+      ],
+      "common_errors": ["Confusing with 'p' sound", "Not using voice"],
+      "mouth_position": "Both lips pressed together, with voicing"
+    },
+    {
+      "symbol": "t",
+      "description": "T sound as in 'top'",
+      "difficulty": "beginner",
+      "example_words": ["top", "cat", "water", "better", "night"],
+      "tips": [
+        "Touch tongue tip to roof of mouth behind teeth",
+        "Release with sharp puff of air",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Tongue placement too far forward", "Not enough air release"],
+      "mouth_position": "Tongue tip touches alveolar ridge"
+    },
+    {
+      "symbol": "d",
+      "description": "D sound as in 'dog'",
+      "difficulty": "beginner",
+      "example_words": ["dog", "red", "middle", "made", "good"],
+      "tips": [
+        "Same tongue position as 't'",
+        "Use your voice (vocal cords vibrate)",
+        "Less air release than 't'"
+      ],
+      "common_errors": ["Confusing with 't' sound", "Not using voice properly"],
+      "mouth_position": "Tongue tip touches alveolar ridge, with voicing"
+    },
+    {
+      "symbol": "k",
+      "description": "K sound as in 'cat'",
+      "difficulty": "beginner",
+      "example_words": ["cat", "back", "school", "make", "book"],
+      "tips": [
+        "Back of tongue touches soft palate",
+        "Release with puff of air",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Tongue position too forward", "Not enough air release"],
+      "mouth_position": "Back of tongue touches velum"
+    },
+    {
+      "symbol": "g",
+      "description": "G sound as in 'go'",
+      "difficulty": "beginner",
+      "example_words": ["go", "big", "angry", "dog", "egg"],
+      "tips": [
+        "Same tongue position as 'k'",
+        "Use your voice (vocal cords vibrate)",
+        "Less air release than 'k'"
+      ],
+      "common_errors": ["Confusing with 'k' sound", "Not using voice"],
+      "mouth_position": "Back of tongue touches velum, with voicing"
+    },
+    {
+      "symbol": "f",
+      "description": "F sound as in 'fish'",
+      "difficulty": "intermediate",
+      "example_words": ["fish", "coffee", "laugh", "phone", "if"],
+      "tips": [
+        "Touch upper teeth to lower lip",
+        "Blow air through the gap",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Both lips together instead of teeth to lip", "Not enough air flow"],
+      "mouth_position": "Upper teeth touch lower lip"
+    },
+    {
+      "symbol": "v",
+      "description": "V sound as in 'very'",
+      "difficulty": "intermediate",
+      "example_words": ["very", "have", "seven", "love", "give"],
+      "tips": [
+        "Same position as 'f'",
+        "Use your voice (vocal cords vibrate)",
+        "Feel vibration in your lip"
+      ],
+      "common_errors": ["Confusing with 'f' sound", "Not using voice", "Using 'w' sound instead"],
+      "mouth_position": "Upper teeth touch lower lip, with voicing"
+    },
+    {
+      "symbol": "θ",
+      "description": "Th sound as in 'think'",
+      "difficulty": "advanced",
+      "example_words": ["think", "both", "three", "math", "mouth"],
+      "tips": [
+        "Put tongue tip between your teeth",
+        "Blow air gently over tongue",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Using 's' or 'f' sound instead", "Tongue not between teeth", "Too much air"],
+      "mouth_position": "Tongue tip between teeth"
+    },
+    {
+      "symbol": "ð",
+      "description": "Th sound as in 'the'",
+      "difficulty": "advanced",
+      "example_words": ["the", "this", "mother", "weather", "breathe"],
+      "tips": [
+        "Same position as voiceless 'th'",
+        "Use your voice (vocal cords vibrate)",
+        "Feel gentle vibration in tongue"
+      ],
+      "common_errors": ["Using 'z' or 'v' sound instead", "Confusing with voiceless 'th'"],
+      "mouth_position": "Tongue tip between teeth, with voicing"
+    },
+    {
+      "symbol": "s",
+      "description": "S sound as in 'sun'",
+      "difficulty": "intermediate",
+      "example_words": ["sun", "house", "lesson", "nice", "bus"],
+      "tips": [
+        "Tongue tip near roof of mouth behind teeth",
+        "Create narrow channel for air",
+        "Keep air flow steady and smooth"
+      ],
+      "common_errors": ["Lateral air escape", "Tongue too far forward", "Not enough air pressure"],
+      "mouth_position": "Tongue tip approaches alveolar ridge"
+    },
+    {
+      "symbol": "z",
+      "description": "Z sound as in 'zoo'",
+      "difficulty": "intermediate",
+      "example_words": ["zoo", "maze", "lazy", "music", "is"],
+      "tips": [
+        "Same tongue position as 's'",
+        "Use your voice (vocal cords vibrate)",
+        "Feel buzzing sensation"
+      ],
+      "common_errors": ["Confusing with 's' sound", "Not using voice consistently"],
+      "mouth_position": "Tongue tip approaches alveolar ridge, with voicing"
+    },
+    {
+      "symbol": "ʃ",
+      "description": "Sh sound as in 'she'",
+      "difficulty": "intermediate",
+      "example_words": ["she", "wish", "nation", "machine", "fish"],
+      "tips": [
+        "Tongue tip slightly back from 's' position",
+        "Round lips slightly",
+        "Softer air flow than 's'"
+      ],
+      "common_errors": ["Confusing with 's' sound", "Not rounding lips enough"],
+      "mouth_position": "Tongue tip behind alveolar ridge, lips slightly rounded"
+    },
+    {
+      "symbol": "ʒ",
+      "description": "Zh sound as in 'measure'",
+      "difficulty": "advanced",
+      "example_words": ["measure", "vision", "usual", "garage", "beige"],
+      "tips": [
+        "Same position as 'sh'",
+        "Use your voice (vocal cords vibrate)",
+        "Less common than 'sh' sound"
+      ],
+      "common_errors": ["Confusing with 'sh' sound", "Not using voice"],
+      "mouth_position": "Tongue tip behind alveolar ridge, lips slightly rounded, with voicing"
+    },
+    {
+      "symbol": "tʃ",
+      "description": "Ch sound as in 'chair'",
+      "difficulty": "intermediate",
+      "example_words": ["chair", "much", "teacher", "lunch", "which"],
+      "tips": [
+        "Start with 't' position then move to 'sh'",
+        "It's like 't' + 'sh' combined quickly",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Separating the two parts too much", "Using just 'sh' sound"],
+      "mouth_position": "Tongue starts at alveolar ridge, moves back"
+    },
+    {
+      "symbol": "dʒ",
+      "description": "J sound as in 'job'",
+      "difficulty": "intermediate",
+      "example_words": ["job", "bridge", "large", "judge", "age"],
+      "tips": [
+        "Start with 'd' position then move to 'zh'",
+        "It's like 'd' + 'zh' combined quickly",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Not using voice", "Separating the components"],
+      "mouth_position": "Tongue starts at alveolar ridge, moves back, with voicing"
+    },
+    {
+      "symbol": "m",
+      "description": "M sound as in 'mother'",
+      "difficulty": "beginner",
+      "example_words": ["mother", "home", "summer", "time", "swim"],
+      "tips": [
+        "Close lips completely",
+        "Let sound come through nose",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Opening lips too early", "Not enough nasal resonance"],
+      "mouth_position": "Lips closed, soft palate lowered for nasal airflow"
+    },
+    {
+      "symbol": "n",
+      "description": "N sound as in 'no'",
+      "difficulty": "beginner",
+      "example_words": ["no", "sun", "dinner", "one", "green"],
+      "tips": [
+        "Touch tongue tip to roof of mouth behind teeth",
+        "Let sound come through nose",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Wrong tongue placement", "Not enough nasal resonance"],
+      "mouth_position": "Tongue tip at alveolar ridge, soft palate lowered"
+    },
+    {
+      "symbol": "ŋ",
+      "description": "Ng sound as in 'sing'",
+      "difficulty": "intermediate",
+      "example_words": ["sing", "long", "finger", "think", "bank"],
+      "tips": [
+        "Back of tongue touches soft palate like 'k'",
+        "Let sound come through nose",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Adding extra 'g' sound", "Wrong tongue placement"],
+      "mouth_position": "Back of tongue touches velum, soft palate lowered"
+    },
+    {
+      "symbol": "l",
+      "description": "L sound as in 'love'",
+      "difficulty": "advanced",
+      "example_words": ["love", "help", "yellow", "tall", "will"],
+      "tips": [
+        "Touch tongue tip to roof of mouth behind teeth",
+        "Let air flow around sides of tongue",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Using 'r' sound instead", "Not enough side air flow", "Dark vs. light L confusion"],
+      "mouth_position": "Tongue tip at alveolar ridge, sides lowered"
+    },
+    {
+      "symbol": "r",
+      "description": "R sound as in 'red'",
+      "difficulty": "advanced",
+      "example_words": ["red", "car", "sorry", "hear", "very"],
+      "tips": [
+        "Curl tongue tip up and back slightly",
+        "Don't let tongue touch roof of mouth",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Tongue touching roof of mouth", "Using 'l' sound instead", "Trill instead of approximant"],
+      "mouth_position": "Tongue tip raised and retracted, not touching anything"
+    },
+    {
+      "symbol": "j",
+      "description": "Y sound as in 'yes'",
+      "difficulty": "beginner",
+      "example_words": ["yes", "year", "you", "beyond", "union"],
+      "tips": [
+        "Raise tongue toward hard palate like 'i' vowel",
+        "Move quickly to next sound",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Making it too long", "Wrong tongue position"],
+      "mouth_position": "Tongue high and front, moving quickly"
+    },
+    {
+      "symbol": "w",
+      "description": "W sound as in 'water'",
+      "difficulty": "intermediate",
+      "example_words": ["water", "away", "ower", "sweet", "quiet"],
+      "tips": [
+        "Round lips tightly like 'oo' vowel",
+        "Move quickly to next sound",
+        "Use your voice (vocal cords vibrate)"
+      ],
+      "common_errors": ["Not rounding lips enough", "Confusing with 'v' sound"],
+      "mouth_position": "Lips strongly rounded, moving quickly"
+    },
+    {
+      "symbol": "h",
+      "description": "H sound as in 'house'",
+      "difficulty": "beginner",
+      "example_words": ["house", "help", "behind", "who", "perhaps"],
+      "tips": [
+        "Open mouth slightly",
+        "Breathe out gently",
+        "No vocal cord vibration"
+      ],
+      "common_errors": ["Making it too strong", "Adding voice", "Omitting the sound"],
+      "mouth_position": "Neutral, slight breath release"
+    }
+  ],
+  "diphthongs": [
+    {
+      "symbol": "eɪ",
+      "description": "Long A sound as in 'day'",
+      "difficulty": "intermediate",
+      "example_words": ["day", "make", "great", "eight", "they"],
+      "tips": [
+        "Start with 'e' sound and glide to 'i'",
+        "Make it one smooth movement",
+        "The first part is longer and stronger"
+      ],
+      "common_errors": ["Making two separate sounds", "Not gliding smoothly"],
+      "mouth_position": "Starts mid-front, moves to high front"
+    },
+    {
+      "symbol": "aɪ",
+      "description": "I sound as in 'my'",
+      "difficulty": "intermediate",
+      "example_words": ["my", "time", "like", "high", "buy"],
+      "tips": [
+        "Start with 'a' sound and glide to 'i'",
+        "Open mouth wide at start, then close",
+        "Make it one flowing sound"
+      ],
+      "common_errors": ["Not opening mouth wide enough at start", "Making two separate sounds"],
+      "mouth_position": "Starts low central, moves to high front"
+    },
+    {
+      "symbol": "ɔɪ",
+      "description": "Oy sound as in 'boy'",
+      "difficulty": "advanced",
+      "example_words": ["boy", "coin", "voice", "choice", "destroy"],
+      "tips": [
+        "Start with 'o' sound and glide to 'i'",
+        "Keep lips rounded at start, then spread",
+        "This is a less common diphthong"
+      ],
+      "common_errors": ["Not rounding lips enough at start", "Making the glide too slow"],
+      "mouth_position": "Starts low back rounded, moves to high front"
+    },
+    {
+      "symbol": "aʊ",
+      "description": "Ow sound as in 'now'",
+      "difficulty": "intermediate",
+      "example_words": ["now", "house", "about", "mouth", "how"],
+      "tips": [
+        "Start with 'a' sound and glide to 'u'",
+        "Open mouth wide, then round lips",
+        "Make smooth transition"
+      ],
+      "common_errors": ["Not opening mouth wide enough at start", "Not rounding lips at end"],
+      "mouth_position": "Starts low central, moves to high back rounded"
+    },
+    {
+      "symbol": "oʊ",
+      "description": "Long O sound as in 'go'",
+      "difficulty": "intermediate",
+      "example_words": ["go", "home", "know", "phone", "boat"],
+      "tips": [
+        "Start with 'o' sound and glide slightly to 'u'",
+        "Keep lips rounded throughout",
+        "Second part is very subtle"
+      ],
+      "common_errors": ["Making it a pure vowel instead of diphthong", "Overdoing the glide"],
+      "mouth_position": "Starts mid-back rounded, slight movement to high back"
+    }
+  ]
+}

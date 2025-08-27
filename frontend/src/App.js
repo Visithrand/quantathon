@@ -1,4 +1,4 @@
-const { useState, useEffect, useRef } = React;
+import React, { useState, useEffect, useRef } from 'react';
 
 // Main Speech Therapy App Component
 function App() {
@@ -716,5 +716,5 @@ function Settings() {
   );
 }
 
-// Render the app
-ReactDOM.render(<App />, document.getElementById('root'));
+// Export the App component
+export default App;

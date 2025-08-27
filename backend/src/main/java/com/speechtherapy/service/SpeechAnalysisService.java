@@ -17,15 +17,14 @@ import java.util.*;
 @Service
 public class SpeechAnalysisService {
     
-    @Autowired
-    private ExerciseRepository exerciseRepository;
-    
-    @Autowired
-    private UserService userService;
-    
+    private final ExerciseRepository exerciseRepository;
+    private final UserService userService;
     private final WebClient webClient;
     
-    public SpeechAnalysisService() {
+    @Autowired
+    public SpeechAnalysisService(ExerciseRepository exerciseRepository, UserService userService) {
+        this.exerciseRepository = exerciseRepository;
+        this.userService = userService;
         this.webClient = WebClient.builder()
             .baseUrl("http://localhost:8080") // Python NLP service URL
             .build();

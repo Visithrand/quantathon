@@ -21,7 +21,6 @@
     "postcss": "^8.4.21",
     "@headlessui/react": "^1.7.13",
     "@heroicons/react": "^2.0.16",
-    "react-audio-recorder": "^1.0.0",
     "recharts": "^2.5.0",
     "framer-motion": "^9.0.7"
   },

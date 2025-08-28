@@ -2,7 +2,11 @@ package com.speechtherapy.service;
 
 import com.speechtherapy.model.User;
 import com.speechtherapy.model.UserProgress;
+import com.speechtherapy.model.RedeemCode;
 import com.speechtherapy.repository.UserProgressRepository;
+import com.speechtherapy.repository.RedeemCodeRepository;
+import com.speechtherapy.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.ArrayList;
 
 @Service
 @Transactional
@@ -18,6 +23,14 @@ public class ProgressService {
     
     @Autowired
     private UserProgressRepository userProgressRepository;
+    
+    @Autowired
+    private RedeemCodeRepository redeemCodeRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+    
+
     
     public Map<String, Object> getUserProgressSummary(User user) {
         Map<String, Object> summary = new HashMap<>();
@@ -74,10 +87,11 @@ public class ProgressService {
         return summary;
     }
     
+    // Weekly progress is now handled by WeeklyPlanService
     public List<UserProgress> getWeeklyProgress(User user) {
-        LocalDate today = LocalDate.now();
-        LocalDate weekStart = today.minusDays(6);
-        return userProgressRepository.findByUserAndDateRange(user, weekStart, today);
+        // This method is kept for backward compatibility but returns empty list
+        // Weekly progress is now handled by WeeklyPlanService
+        return new ArrayList<>();
     }
     
     public List<UserProgress> getMonthlyProgress(User user) {
@@ -121,7 +135,44 @@ public class ProgressService {
         // Check if daily goal is met
         progress.setGoalsMet(progress.getTotalPracticeTime() >= user.getDailyGoal());
         
-        return userProgressRepository.save(progress);
+        UserProgress saved = userProgressRepository.save(progress);
+
+        // Weekly progress is now handled by WeeklyPlanService
+        // This method focuses on daily progress tracking
+
+        // Update user's points and streaks if requested
+        int pointsToAdd = (Integer) progressUpdate.getOrDefault("pointsToAdd", 0);
+        if (pointsToAdd > 0) {
+            user.setTotalPoints((user.getTotalPoints() == null ? 0 : user.getTotalPoints()) + pointsToAdd);
+        }
+
+        // Streak logic (increment if practiced today; reset if missed yesterday)
+        if (Boolean.TRUE.equals(progress.getGoalsMet())) {
+            LocalDate yesterday = today.minusDays(1);
+            boolean practicedYesterday = userProgressRepository.findByUserAndPracticeDate(user, yesterday).isPresent();
+            if (practicedYesterday) {
+                user.setStreakDays((user.getStreakDays() == null ? 0 : user.getStreakDays()) + 1);
+            } else {
+                user.setStreakDays(1);
+            }
+        }
+
+        // Generate redeem code at thresholds (e.g., 500, 1000, 1500 ...)
+        int thresholdBase = 500;
+        int totalPoints = user.getTotalPoints() == null ? 0 : user.getTotalPoints();
+        if (totalPoints >= thresholdBase) {
+            int highestThresholdReached = (totalPoints / thresholdBase) * thresholdBase;
+            // Prevent duplicates for the same threshold
+            boolean alreadyIssued = !redeemCodeRepository.findByUserAndThreshold(user, highestThresholdReached).isEmpty();
+            if (!alreadyIssued) {
+                String code = generateRedeemCode(user.getId(), highestThresholdReached);
+                RedeemCode redeem = new RedeemCode(user, code, highestThresholdReached);
+                redeemCodeRepository.save(redeem);
+            }
+        }
+
+        userRepository.save(user);
+        return saved;
     }
     
     public Map<String, Object> getProgressAnalytics(User user) {
@@ -175,6 +226,11 @@ public class ProgressService {
         return analytics;
     }
     
+    private String generateRedeemCode(Long userId, int threshold) {
+        String base = userId + "-" + threshold + "-" + System.nanoTime();
+        return Integer.toHexString(base.hashCode()).toUpperCase() + Long.toHexString(System.currentTimeMillis()).substring(8).toUpperCase();
+    }
+
     public UserProgress getTodayProgress(User user) {
         LocalDate today = LocalDate.now();
         return userProgressRepository.findByUserAndPracticeDate(user, today)

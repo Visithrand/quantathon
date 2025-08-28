@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 import java.util.List;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("/api/users")
@@ -40,6 +41,10 @@ public class UserController {
             }
             
             Map<String, Object> progressData = progressService.getUserProgressSummary(user);
+            // Weekly progress is now handled by WeeklyPlanService
+            progressData.put("weeklyPracticeTime", 0); // Placeholder
+            progressData.put("weeklyProgressPercentage", 0); // Placeholder
+            progressData.put("weeklyStreak", user.getWeeklyStreak());
             return ResponseEntity.ok(progressData);
             
         } catch (Exception e) {
@@ -78,13 +83,19 @@ public class UserController {
             if (user == null) {
                 return ResponseEntity.notFound().build();
             }
-            
             Map<String, Object> statistics = userService.getUserStatistics(user);
             return ResponseEntity.ok(statistics);
             
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Failed to load statistics: " + e.getMessage()));
         }
+    }
+
+    @GetMapping("/{id}/redeem-codes")
+    public ResponseEntity<?> listUserCodes(@PathVariable Long id, @Autowired com.speechtherapy.repository.RedeemCodeRepository redeemCodeRepository) {
+        User user = userService.getUserById(id);
+        if (user == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(redeemCodeRepository.findAll().stream().filter(c -> c.getUser().getId().equals(id)).toList());
     }
     
     @PostMapping("/{id}/update-progress")
@@ -98,7 +109,9 @@ public class UserController {
             }
             
             UserProgress updatedProgress = progressService.updateDailyProgress(user, progressUpdate);
-            return ResponseEntity.ok(Map.of("progress", updatedProgress, "message", "Progress updated successfully"));
+            Map<String, Object> summary = progressService.getUserProgressSummary(user);
+            summary.put("message", "Progress updated successfully");
+            return ResponseEntity.ok(summary);
             
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Failed to update progress: " + e.getMessage()));
@@ -106,18 +119,21 @@ public class UserController {
     }
     
     @GetMapping("/{id}/weekly-progress")
-    public ResponseEntity<List<UserProgress>> getWeeklyProgress(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> getWeeklyProgress(@PathVariable Long id) {
         try {
             User user = userService.getUserById(id);
             if (user == null) {
                 return ResponseEntity.notFound().build();
             }
             
-            List<UserProgress> weeklyProgress = progressService.getWeeklyProgress(user);
-            return ResponseEntity.ok(weeklyProgress);
+            // Weekly progress is now handled by WeeklyPlanService
+            Map<String, Object> response = new HashMap<>();
+            response.put("message", "Weekly progress is now handled by WeeklyPlanService");
+            response.put("endpoint", "/api/weekly-plan/" + id);
+            return ResponseEntity.ok(response);
             
         } catch (Exception e) {
-            return ResponseEntity.status(500).body(null);
+            return ResponseEntity.status(500).body(Map.of("error", "Failed to get weekly progress"));
         }
     }
     

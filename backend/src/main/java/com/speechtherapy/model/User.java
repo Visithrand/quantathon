@@ -42,6 +42,9 @@ public class User {
     @Column(name = "streak_days")
     private Integer streakDays = 0;
     
+    @Column(name = "weekly_streak_weeks")
+    private Integer weeklyStreak = 0;
+    
     @Column(name = "exercises_completed")
     private Integer exercisesCompleted = 0;
     
@@ -103,6 +106,9 @@ public class User {
     
     public Integer getStreakDays() { return streakDays; }
     public void setStreakDays(Integer streakDays) { this.streakDays = streakDays; }
+    
+    public Integer getWeeklyStreak() { return weeklyStreak; }
+    public void setWeeklyStreak(Integer weeklyStreak) { this.weeklyStreak = weeklyStreak; }
     
     public Integer getExercisesCompleted() { return exercisesCompleted; }
     public void setExercisesCompleted(Integer exercisesCompleted) { this.exercisesCompleted = exercisesCompleted; }

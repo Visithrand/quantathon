@@ -1,7 +1,10 @@
 import React from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
 
-function Navbar({ user, onLogout }) {
+function Navbar({ user }) {
+  const { logout } = useAuth();
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
@@ -13,7 +16,7 @@ function Navbar({ user, onLogout }) {
         <div className="navbar-menu">
           <div className="navbar-user">
             <span className="user-name">Welcome, {user?.name || 'User'}</span>
-            <button onClick={onLogout} className="logout-button">
+            <button onClick={logout} className="logout-button">
               <span>Logout</span>
               <span className="logout-icon">🚪</span>
             </button>

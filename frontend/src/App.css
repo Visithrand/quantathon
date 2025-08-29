@@ -4,7 +4,7 @@
 }
 
 .main-content {
-  padding-top: 20px;
+  /* Removed padding-top since navbar is no longer present */
 }
 
 /* Loading Styles */

@@ -1,8 +1,11 @@
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\config\SchedulerConfig.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\User.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\ComprehensiveExerciseService.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\ExerciseMappingService.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\RedeemCode.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\ExerciseRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\CompletedExercise.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\DatabaseExerciseRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\CompletedExerciseRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\DataSeederService.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\WeeklyPlanController.java
@@ -15,8 +18,11 @@ D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\FluencyScoreRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\config\SecurityConfig.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\CompletedExerciseController.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\DatabaseExercise.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\UserRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\AdminController.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\DatabaseExerciseController.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\DatabaseExerciseService.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\UserProgress.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\AIExerciseService.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\CompletedExerciseService.java
@@ -26,6 +32,7 @@ D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\WeeklyPlanService.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\AIExercise.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\model\Exercise.java
+D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\service\ExerciseDataSeeder.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\RedeemCodeController.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\repository\RedeemCodeRepository.java
 D:\speech-therapy\SpeechCoach\backend\src\main\java\com\speechtherapy\controller\UserController.java

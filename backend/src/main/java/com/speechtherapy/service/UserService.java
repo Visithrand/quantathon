@@ -44,7 +44,7 @@ public class UserService {
     }
     
     public User createDefaultUser() {
-        User defaultUser = new User("Demo User", "demo@speechtherapy.com", 25);
+        User defaultUser = new User("Demo User", "demo@speechtherapy.com", "demo123", 25);
         defaultUser.setNativeLanguage("English");
         defaultUser.setTargetLanguage("English");
         defaultUser.setDifficultyLevel("Intermediate");

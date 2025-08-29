@@ -17,7 +17,7 @@ function SpeechTherapy({ userId }) {
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [lastCompletedExercise, setLastCompletedExercise] = useState(null);
 
-  const API_BASE = 'http://localhost:8082/api';
+  const API_BASE = 'http://localhost:8080/api';
 
   useEffect(() => {
     if (userId) {
@@ -472,19 +472,19 @@ function SpeechTherapy({ userId }) {
               <div className="space-y-3">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Total Minutes:</span>
-                  <span className="font-medium">{weeklyPlan.totalMinutesCompleted}/{weeklyPlan.totalMinutesGoal}</span>
+                  <span className="font-medium">{weeklyPlan.totalMinutesCompleted || 0}/{weeklyPlan.totalMinutesGoal || 105}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Body Exercises:</span>
-                  <span className="font-medium">{weeklyPlan.bodyExercisesCompleted}/{weeklyPlan.bodyExercisesGoal}</span>
+                  <span className="font-medium">{weeklyPlan.bodyExercisesCompleted || 0}/{weeklyPlan.bodyExercisesGoal || 7}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Speech Exercises:</span>
-                  <span className="font-medium">{weeklyPlan.speechExercisesCompleted}/{weeklyPlan.speechExercisesGoal}</span>
+                  <span className="font-medium">{weeklyPlan.speechExercisesCompleted || 0}/{weeklyPlan.speechExercisesGoal || 14}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Weekly Streak:</span>
-                  <span className="font-medium">{weeklyPlan.weeklyStreak} weeks</span>
+                  <span className="font-medium">{weeklyPlan.weeklyStreak || 0} weeks</span>
                 </div>
               </div>
             </div>
@@ -495,12 +495,12 @@ function SpeechTherapy({ userId }) {
                 <div>
                   <div className="flex justify-between text-sm text-gray-600 mb-1">
                     <span>Overall Progress</span>
-                    <span>{Math.round(weeklyPlan.getProgressPercentage())}%</span>
+                    <span>{Math.round(weeklyPlan.totalMinutesGoal > 0 ? (weeklyPlan.totalMinutesCompleted || 0) / (weeklyPlan.totalMinutesGoal || 105) * 100 : 0)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${weeklyPlan.getProgressPercentage()}%` }}
+                      style={{ width: `${weeklyPlan.totalMinutesGoal > 0 ? (weeklyPlan.totalMinutesCompleted || 0) / (weeklyPlan.totalMinutesGoal || 105) * 100 : 0}%` }}
                     ></div>
                   </div>
                 </div>
@@ -508,12 +508,12 @@ function SpeechTherapy({ userId }) {
                 <div>
                   <div className="flex justify-between text-sm text-gray-600 mb-1">
                     <span>Body Exercises</span>
-                    <span>{Math.round(weeklyPlan.getBodyExercisesProgress())}%</span>
+                    <span>{Math.round(weeklyPlan.bodyExercisesGoal > 0 ? (weeklyPlan.bodyExercisesCompleted || 0) / (weeklyPlan.bodyExercisesGoal || 7) * 100 : 0)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-green-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${weeklyPlan.getBodyExercisesProgress()}%` }}
+                      style={{ width: `${weeklyPlan.bodyExercisesGoal > 0 ? (weeklyPlan.bodyExercisesCompleted || 0) / (weeklyPlan.bodyExercisesGoal || 7) * 100 : 0}%` }}
                     ></div>
                   </div>
                 </div>
@@ -521,12 +521,12 @@ function SpeechTherapy({ userId }) {
                 <div>
                   <div className="flex justify-between text-sm text-gray-600 mb-1">
                     <span>Speech Exercises</span>
-                    <span>{Math.round(weeklyPlan.getSpeechExercisesProgress())}%</span>
+                    <span>{Math.round(weeklyPlan.speechExercisesGoal > 0 ? (weeklyPlan.speechExercisesCompleted || 0) / (weeklyPlan.speechExercisesGoal || 14) * 100 : 0)}%</span>
                   </div>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-purple-600 h-2 rounded-full transition-all duration-300"
-                      style={{ width: `${weeklyPlan.getSpeechExercisesProgress()}%` }}
+                      style={{ width: `${weeklyPlan.speechExercisesGoal > 0 ? (weeklyPlan.speechExercisesCompleted || 0) / (weeklyPlan.speechExercisesGoal || 14) * 100 : 0}%` }}
                     ></div>
                   </div>
                 </div>
@@ -534,7 +534,7 @@ function SpeechTherapy({ userId }) {
             </div>
           </div>
           
-          {weeklyPlan.isCompleted && (
+          {weeklyPlan.isCompleted === true && (
             <div className="mt-6 bg-green-50 border border-green-200 rounded-lg p-4 text-center">
               <div className="text-green-800 font-medium text-lg">🎉 Congratulations!</div>
               <div className="text-green-700">You've completed all your weekly goals!</div>

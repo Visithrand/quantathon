@@ -29,14 +29,20 @@ public class AuthController {
                 return ResponseEntity.badRequest().body(error);
             }
             
-            // For demo purposes, create a default user if none exists
-            User user = userService.getOrCreateDefaultUser();
+            // Get user by email
+            User user = userService.getUserByEmail(email);
             
-            // Simple password check (in production, use proper password hashing)
-            if ("password123".equals(password) || user.getEmail().equals(email)) {
+            if (user == null) {
+                Map<String, Object> error = new HashMap<>();
+                error.put("message", "Invalid email or password");
+                return ResponseEntity.status(401).body(error);
+            }
+            
+            // Check password (in production, use proper password hashing)
+            if (password.equals(user.getPassword())) {
                 Map<String, Object> response = new HashMap<>();
                 response.put("message", "Login successful");
-                response.put("token", "demo-token-" + System.currentTimeMillis());
+                response.put("token", "user-token-" + System.currentTimeMillis());
                 response.put("user", user);
                 return ResponseEntity.ok(response);
             } else {
@@ -77,6 +83,7 @@ public class AuthController {
             User newUser = new User();
             newUser.setName(name);
             newUser.setEmail(email);
+            newUser.setPassword(password); // Set the password field
             newUser.setAge(25); // Default age for demo
             newUser.setDailyGoal(15);
             newUser.setWeeklyGoal(105);

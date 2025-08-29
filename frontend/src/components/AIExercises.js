@@ -14,7 +14,7 @@ function AIExercises({ userId }) {
   const [mediaRecorder, setMediaRecorder] = useState(null);
   const [chunks, setChunks] = useState([]);
 
-  const API_BASE = 'http://localhost:8082/api';
+  const API_BASE = 'http://localhost:8080/api';
 
   useEffect(() => {
     if (userId) {

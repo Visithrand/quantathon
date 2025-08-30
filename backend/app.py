@@ -466,7 +466,16 @@ def update_progress():
                 'dailyProgress': {},
                 'exerciseHistory': [],
                 'achievements': [],
-                'lastExerciseDate': None
+                'lastExerciseDate': None,
+                'todayProgress': {
+                    'date': datetime.now().strftime('%A, %B %d, %Y'),
+                    'exercisesCompleted': 0,
+                    'totalMinutes': 0,
+                    'averageScore': 0,
+                    'currentStreak': 0
+                },
+                'completedModules': [],
+                'weeklyPlan': []
             }
         
         # Update progress
@@ -481,26 +490,46 @@ def update_progress():
         else:
             progress['averageScore'] = exercise_data.get('score', 0)
         
-        # Update daily progress
-        today = datetime.now().strftime('%Y-%m-%d')
-        if today not in progress['dailyProgress']:
-            progress['dailyProgress'][today] = {
+        # Update daily progress with today's date
+        today = datetime.now()
+        today_str = today.strftime('%Y-%m-%d')
+        today_display = today.strftime('%A, %B %d, %Y')  # e.g., "Saturday, December 16, 2023"
+        
+        if today_str not in progress['dailyProgress']:
+            progress['dailyProgress'][today_str] = {
+                'date': today_display,
                 'minutes': 0,
                 'exercises': 0,
-                'score': 0
+                'score': 0,
+                'exerciseTypes': [],
+                'difficultyLevels': []
             }
         
-        progress['dailyProgress'][today]['minutes'] += exercise_data.get('duration', 5)
-        progress['dailyProgress'][today]['exercises'] += 1
-        progress['dailyProgress'][today]['score'] = max(
-            progress['dailyProgress'][today]['score'],
-            exercise_data.get('score', 0)
-        )
+        # Update today's progress
+        daily = progress['dailyProgress'][today_str]
+        daily['minutes'] += exercise_data.get('duration', 5)
+        daily['exercises'] += 1
+        daily['score'] = max(daily['score'], exercise_data.get('score', 0))
+        
+        # Track exercise types and difficulty levels
+        if exercise_data.get('exerciseType') not in daily['exerciseTypes']:
+            daily['exerciseTypes'].append(exercise_data.get('exerciseType', 'General'))
+        if exercise_data.get('difficulty') not in daily['difficultyLevels']:
+            daily['difficultyLevels'].append(exercise_data.get('difficulty', 'Beginner'))
+        
+        # Update today's progress summary
+        progress['todayProgress'] = {
+            'date': today_display,
+            'exercisesCompleted': daily['exercises'],
+            'totalMinutes': daily['minutes'],
+            'averageScore': daily['score'],
+            'currentStreak': progress['streakDays']
+        }
         
         # Update streak
         if progress['lastExerciseDate']:
             last_date = datetime.strptime(progress['lastExerciseDate'], '%Y-%m-%d')
-            days_diff = (datetime.now() - last_date).days
+            days_diff = (today - last_date).days
             if days_diff == 1:
                 progress['streakDays'] += 1
             elif days_diff > 1:
@@ -508,15 +537,20 @@ def update_progress():
         else:
             progress['streakDays'] = 1
         
-        progress['lastExerciseDate'] = today
+        progress['lastExerciseDate'] = today_str
         
-        # Add to exercise history
+        # Add to exercise history with enhanced data
         progress['exerciseHistory'].append({
-            'date': today,
-            'type': exercise_data.get('type', 'speech'),
+            'date': today_str,
+            'displayDate': today_display,
+            'type': exercise_data.get('type', 'exercise'),
+            'exerciseType': exercise_data.get('exerciseType', 'General'),
+            'difficulty': exercise_data.get('difficulty', 'Beginner'),
             'score': exercise_data.get('score', 0),
             'duration': exercise_data.get('duration', 5),
-            'points': exercise_data.get('points', 10)
+            'points': exercise_data.get('points', 10),
+            'timeSpent': exercise_data.get('timeSpent', 0),
+            'progress': exercise_data.get('progress', 0)
         })
         
         # Check for achievements
@@ -525,7 +559,8 @@ def update_progress():
         return jsonify({
             'success': True,
             'progress': progress,
-            'message': 'Progress updated successfully'
+            'message': 'Progress updated successfully',
+            'todayProgress': progress['todayProgress']
         })
         
     except Exception as e:
@@ -540,19 +575,135 @@ def get_user_progress(user_id):
         
         progress = user_progress[user_id]
         
-        # Calculate weekly progress
+        # Calculate real weekly progress
         weekly_progress = calculate_weekly_progress(progress)
+        
+        # Generate real weekly plan based on completed exercises
+        weekly_plan = generate_weekly_plan(progress)
+        
+        # Calculate real progress statistics
+        progress_stats = calculate_real_progress_stats(progress)
         
         return jsonify({
             'success': True,
             'progress': {
                 **progress,
-                'weeklyProgress': weekly_progress
+                'weeklyProgress': weekly_progress,
+                'weeklyPlan': weekly_plan,
+                'progressStats': progress_stats
             }
         })
         
     except Exception as e:
         return jsonify({'error': f'Failed to get progress: {str(e)}'}), 500
+
+def generate_weekly_plan(progress):
+    """Generate weekly plan based on user's actual progress and exercise history"""
+    try:
+        today = datetime.now()
+        weekly_plan = []
+        
+        # Get exercise types the user has practiced
+        practiced_types = set()
+        for exercise in progress.get('exerciseHistory', []):
+            practiced_types.add(exercise.get('exerciseType', 'General'))
+        
+        # Generate plan for next 7 days
+        for i in range(7):
+            plan_date = today + timedelta(days=i)
+            date_str = plan_date.strftime('%Y-%m-%d')
+            display_date = plan_date.strftime('%A, %B %d')
+            
+            # Check if user has completed exercises on this date
+            daily_exercises = progress.get('dailyProgress', {}).get(date_str, {})
+            completed_count = daily_exercises.get('exercises', 0)
+            
+            # Generate recommendations based on practice patterns
+            if practiced_types:
+                recommended_type = list(practiced_types)[i % len(practiced_types)]
+            else:
+                recommended_type = 'Pronunciation'  # Default recommendation
+            
+            weekly_plan.append({
+                'date': date_str,
+                'displayDate': display_date,
+                'dayOfWeek': plan_date.strftime('%A'),
+                'recommendedType': recommended_type,
+                'targetMinutes': 15,  # 15 minutes daily goal
+                'completedMinutes': daily_exercises.get('minutes', 0),
+                'completedExercises': completed_count,
+                'isCompleted': completed_count > 0
+            })
+        
+        return weekly_plan
+        
+    except Exception as e:
+        print(f"Error generating weekly plan: {e}")
+        return []
+
+def calculate_real_progress_stats(progress):
+    """Calculate real progress statistics from actual exercise data"""
+    try:
+        exercise_history = progress.get('exerciseHistory', [])
+        
+        if not exercise_history:
+            return {
+                'totalExercises': 0,
+                'totalMinutes': 0,
+                'averageScore': 0,
+                'bestScore': 0,
+                'favoriteType': 'None',
+                'streakDays': progress.get('streakDays', 0),
+                'weeklyGoalProgress': 0
+            }
+        
+        # Calculate real statistics
+        total_exercises = len(exercise_history)
+        total_minutes = sum(ex.get('duration', 0) for ex in exercise_history)
+        scores = [ex.get('score', 0) for ex in exercise_history]
+        average_score = sum(scores) / len(scores) if scores else 0
+        best_score = max(scores) if scores else 0
+        
+        # Find favorite exercise type
+        type_counts = {}
+        for ex in exercise_history:
+            ex_type = ex.get('exerciseType', 'General')
+            type_counts[ex_type] = type_counts.get(ex_type, 0) + 1
+        
+        favorite_type = max(type_counts.items(), key=lambda x: x[1])[0] if type_counts else 'None'
+        
+        # Calculate weekly goal progress
+        weekly_goal = progress.get('weeklyGoal', 30)
+        this_week_minutes = 0
+        today = datetime.now()
+        for i in range(7):
+            date = (today - timedelta(days=i)).strftime('%Y-%m-%d')
+            if date in progress.get('dailyProgress', {}):
+                this_week_minutes += progress['dailyProgress'][date].get('minutes', 0)
+        
+        weekly_goal_progress = min(100, (this_week_minutes / weekly_goal) * 100) if weekly_goal > 0 else 0
+        
+        return {
+            'totalExercises': total_exercises,
+            'totalMinutes': total_minutes,
+            'averageScore': round(average_score, 1),
+            'bestScore': best_score,
+            'favoriteType': favorite_type,
+            'streakDays': progress.get('streakDays', 0),
+            'weeklyGoalProgress': round(weekly_goal_progress, 1)
+        }
+        
+    except Exception as e:
+        print(f"Error calculating progress stats: {e}")
+        return {
+            'totalExercises': 0,
+            'totalMinutes': 0,
+            'averageScore': 0,
+            'bestScore': 0,
+            'favoriteType': 'None',
+            'streakDays': 0,
+            'weeklyGoalProgress': 0
+        }
 
 def calculate_weekly_progress(progress):
     """Calculate weekly progress for the last 7 days"""
@@ -601,6 +752,105 @@ def check_achievements(progress):
 def favicon():
     """Serve favicon to prevent 404 errors"""
     return '', 204  # No content response
+
+@app.route('/api/speech-analysis/exercise', methods=['POST'])
+def analyze_exercise_completion():
+    """Analyze exercise completion and return performance metrics"""
+    try:
+        data = request.get_json()
+        
+        if not data or 'exerciseId' not in data:
+            return jsonify({'error': 'Exercise data is required'}), 400
+        
+        # Simulate speech analysis for exercise completion
+        # In real implementation, this would analyze actual speech data
+        exercise_type = data.get('exerciseType', 'general')
+        difficulty = data.get('difficulty', 'Beginner')
+        
+        # Generate realistic analysis scores based on exercise type and difficulty
+        analysis_result = generate_exercise_analysis(exercise_type, difficulty)
+        
+        return jsonify({
+            'success': True,
+            'exerciseId': data['exerciseId'],
+            'exerciseType': exercise_type,
+            'difficulty': difficulty,
+            'overallScore': analysis_result['overallScore'],
+            'pronunciationScore': analysis_result['pronunciationScore'],
+            'fluencyScore': analysis_result['fluencyScore'],
+            'clarityScore': analysis_result['clarityScore'],
+            'confidenceLevel': analysis_result['confidenceLevel'],
+            'suggestedImprovements': analysis_result['suggestedImprovements'],
+            'completedAt': data.get('completedAt'),
+            'analysisType': 'exercise_completion'
+        })
+        
+    except Exception as e:
+        return jsonify({'error': f'Exercise analysis failed: {str(e)}'}), 500
+
+def generate_exercise_analysis(exercise_type, difficulty):
+    """Generate realistic exercise analysis scores"""
+    import random
+    
+    # Enhanced base scores based on exercise type
+    base_scores = {
+        'Pronunciation': {'pronunciation': 85, 'fluency': 75, 'clarity': 80},
+        'Fluency': {'pronunciation': 75, 'fluency': 85, 'clarity': 80},
+        'Articulation': {'pronunciation': 80, 'fluency': 75, 'clarity': 85},
+        'Voice': {'pronunciation': 80, 'fluency': 80, 'clarity': 85},
+        'Language': {'pronunciation': 75, 'fluency': 85, 'clarity': 80},
+        'Breathing': {'pronunciation': 70, 'fluency': 90, 'clarity': 85},
+        'Resonance': {'pronunciation': 75, 'fluency': 80, 'clarity': 90},
+        'Projection': {'pronunciation': 80, 'fluency': 75, 'clarity': 85},
+        'Expression': {'pronunciation': 75, 'fluency': 85, 'clarity': 80},
+        'Confidence': {'pronunciation': 80, 'fluency': 80, 'clarity': 85}
+    }
+    
+    # Get base scores for exercise type
+    base = base_scores.get(exercise_type, {'pronunciation': 80, 'fluency': 80, 'clarity': 80})
+    
+    # Apply difficulty multiplier
+    difficulty_multipliers = {
+        'Beginner': 0.9,
+        'Intermediate': 1.0,
+        'Advanced': 1.1
+    }
+    
+    multiplier = difficulty_multipliers.get(difficulty, 1.0)
+    
+    # Add some realistic variation
+    variation = random.uniform(-10, 10)
+    
+    pronunciation_score = min(100, max(0, int(base['pronunciation'] * multiplier + variation)))
+    fluency_score = min(100, max(0, int(base['fluency'] * multiplier + variation)))
+    clarity_score = min(100, max(0, int(base['clarity'] * multiplier + variation)))
+    
+    # Calculate overall score
+    overall_score = int((pronunciation_score + fluency_score + clarity_score) / 3)
+    
+    # Generate confidence level
+    confidence_level = min(100, max(0, int(overall_score + random.uniform(-5, 5))))
+    
+    # Generate suggested improvements
+    improvements = []
+    if pronunciation_score < 80:
+        improvements.append("Focus on clear pronunciation of difficult sounds")
+    if fluency_score < 80:
+        improvements.append("Practice speaking at a consistent pace")
+    if clarity_score < 80:
+        improvements.append("Work on voice projection and clarity")
+    
+    if not improvements:
+        improvements.append("Excellent work! Keep practicing to maintain your skills")
+    
+    return {
+        'overallScore': overall_score,
+        'pronunciationScore': pronunciation_score,
+        'fluencyScore': fluency_score,
+        'clarityScore': clarity_score,
+        'confidenceLevel': confidence_level,
+        'suggestedImprovements': improvements
+    }
 
 @app.route('/api/health', methods=['GET'])
 def health_check():

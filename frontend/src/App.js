@@ -3,10 +3,11 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useAuth } from './contexts/AuthContext';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import SpeechTherapy from './components/SpeechTherapy';
+import Dashboard from './components/Dashboard';
 import Home from './components/Home';
 import Progress from './components/Progress';
 import Storytelling from './components/Storytelling';
+import DailyScenario from './components/DailyScenario';
 import './App.css';
 
 function App() {
@@ -30,14 +31,16 @@ function App() {
           <main className="main-content">
             <Routes>
               <Route path="/home" element={<Home />} />
-              <Route path="/dashboard" element={<SpeechTherapy userId={user?.id} />} />
-              <Route path="/progress" element={<Progress userProgress={{
-                totalPoints: 150,
-                exercisesCompleted: 12,
-                streakDays: 5,
-                weeklyGoal: 30
+              <Route path="/dashboard" element={<Dashboard setCurrentPage={(page) => {
+                // Handle navigation to different pages
+                if (page === 'progress') window.location.href = '/progress';
+                if (page === 'storytelling') window.location.href = '/storytelling';
+                if (page === 'daily-scenario') window.location.href = '/daily-scenario';
+                if (page === 'exercises') window.location.href = '/home';
               }} />} />
-              <Route path="/storytelling" element={<Storytelling />} />
+                             <Route path="/progress" element={<Progress />} />
+               <Route path="/storytelling" element={<Storytelling />} />
+               <Route path="/daily-scenario" element={<DailyScenario />} />
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>

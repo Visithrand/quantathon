@@ -24,6 +24,11 @@ class ConversationService {
   buildConversationMessages(scenarioId, conversationHistory, userMessage) {
     const scenario = this.getScenarioContext(scenarioId);
     
+    console.log('🔧 Building messages for scenario:', scenarioId);
+    console.log('📝 Scenario context:', scenario);
+    console.log('💬 Conversation history length:', conversationHistory.length);
+    console.log('👤 User message:', userMessage);
+    
     const messages = [
       {
         role: 'system',
@@ -33,11 +38,13 @@ class ConversationService {
 
     // Add conversation history (last 10 messages to maintain context)
     const recentHistory = conversationHistory.slice(-10);
-    recentHistory.forEach(msg => {
+    recentHistory.forEach((msg, index) => {
+      const role = msg.type === 'user' ? 'user' : 'assistant';
       messages.push({
-        role: msg.type === 'user' ? 'user' : 'assistant',
+        role: role,
         content: msg.content
       });
+      console.log(`📨 Message ${index + 1}: ${role} - ${msg.content.substring(0, 50)}...`);
     });
 
     // Add current user message
@@ -46,19 +53,33 @@ class ConversationService {
         role: 'user',
         content: userMessage
       });
+      console.log(`📨 Current user message: ${userMessage}`);
     }
 
+    console.log('📤 Final messages array:', messages);
     return messages;
   }
 
   // Send message to AI and get response
   async sendMessage(scenarioId, conversationHistory, userMessage) {
     try {
+      console.log('🚀 Starting AI API call...');
+      console.log('🔑 API Key status:', this.apiKey ? '✅ Set' : '❌ Missing');
+      console.log('🎭 Scenario ID:', scenarioId);
+      
       if (!this.apiKey) {
         throw new Error('API key not set. Please provide your OpenAI API key.');
       }
 
       const messages = this.buildConversationMessages(scenarioId, conversationHistory, userMessage);
+      
+      console.log('📡 Sending request to OpenAI...');
+      console.log('📊 Request payload:', {
+        model: AI_CONFIG.openai.model,
+        max_tokens: AI_CONFIG.openai.maxTokens,
+        temperature: AI_CONFIG.openai.temperature,
+        messageCount: messages.length
+      });
       
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -75,17 +96,24 @@ class ConversationService {
         })
       });
 
+      console.log('📥 Response status:', response.status, response.statusText);
+
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('❌ API Error Response:', errorData);
         throw new Error(`AI API Error: ${errorData.error?.message || response.statusText}`);
       }
 
       const data = await response.json();
+      console.log('✅ API Response received:', data);
+      
       const aiResponse = data.choices[0]?.message?.content?.trim();
       
       if (!aiResponse) {
         throw new Error('No response received from AI');
       }
+
+      console.log('🎯 AI Response extracted:', aiResponse);
 
       return {
         success: true,
@@ -94,7 +122,14 @@ class ConversationService {
       };
 
     } catch (error) {
-      console.error('AI Service Error:', error);
+      console.error('❌ AI Service Error:', error);
+      console.error('🔍 Error details:', {
+        message: error.message,
+        stack: error.stack,
+        scenarioId,
+        userMessage
+      });
+      
       return {
         success: false,
         error: error.message,

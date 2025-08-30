@@ -36,11 +36,15 @@ const DailyScenario = () => {
     const savedApiKey = localStorage.getItem('openai_api_key');
     if (savedApiKey) {
       setApiKey(savedApiKey);
+      // Also set it in the conversation service
+      conversationService.setApiKey(savedApiKey);
     } else {
       // Set default API key if none is saved
       const defaultApiKey = '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';
       setApiKey(defaultApiKey);
       localStorage.setItem('openai_api_key', defaultApiKey);
+      // Set it in the conversation service
+      conversationService.setApiKey(defaultApiKey);
     }
   }, []);
 
@@ -56,20 +60,24 @@ const DailyScenario = () => {
       return;
     }
     
+    console.log('🚀 Starting chat with API key:', apiKey.substring(0, 20) + '...');
+    console.log('🎭 Selected scenario:', selectedScenario.id);
+    
     setIsChatActive(true);
     // Set API key for conversation service
     conversationService.setApiKey(apiKey);
     
     // Initialize with AI greeting based on scenario
     const aiGreeting = getScenarioGreeting(selectedScenario.id);
-    setMessages([
-      {
-        id: 1,
-        type: 'ai',
-        content: aiGreeting,
-        timestamp: new Date().toLocaleTimeString()
-      }
-    ]);
+    const initialMessage = {
+      id: 1,
+      type: 'ai',
+      content: aiGreeting,
+      timestamp: new Date().toLocaleTimeString()
+    };
+    
+    setMessages([initialMessage]);
+    console.log('💬 Initial AI greeting set:', aiGreeting);
   };
 
   // Check if API key is configured
@@ -101,26 +109,32 @@ const DailyScenario = () => {
       timestamp: new Date().toLocaleTimeString()
     };
 
+    // Store the user message first
     setMessages(prev => [...prev, userMessage]);
+    const currentInput = inputMessage; // Store the input before clearing
     setInputMessage('');
     setIsTyping(true);
 
     // Get real AI response
     try {
+      console.log('Sending message to AI:', currentInput);
+      console.log('Current messages:', messages);
+      console.log('Scenario ID:', selectedScenario.id);
+      
       const aiResult = await conversationService.sendMessage(
         selectedScenario.id,
-        messages,
-        inputMessage
+        [...messages, userMessage], // Include the new user message
+        currentInput
       );
       
       let aiResponse;
       if (aiResult.success) {
         aiResponse = aiResult.response;
-        console.log('AI Response:', aiResponse);
-        console.log('API Usage:', aiResult.usage);
+        console.log('✅ AI Response Success:', aiResponse);
+        console.log('📊 API Usage:', aiResult.usage);
       } else {
         aiResponse = aiResult.fallbackResponse;
-        console.warn('AI Error, using fallback:', aiResult.error);
+        console.warn('⚠️ AI Error, using fallback:', aiResult.error);
       }
       
       const aiMessage = {
@@ -137,13 +151,13 @@ const DailyScenario = () => {
       speakAIResponse(aiResponse);
       
       // Analyze conversation after AI response
-      const analysis = conversationService.analyzeConversation([...messages, aiMessage]);
+      const analysis = conversationService.analyzeConversation([...messages, userMessage, aiMessage]);
       setConversationAnalysis(analysis);
       
     } catch (error) {
-      console.error('Error getting AI response:', error);
+      console.error('❌ Error getting AI response:', error);
       // Use fallback response
-      const fallbackResponse = conversationService.getFallbackResponse(selectedScenario.id, inputMessage);
+      const fallbackResponse = conversationService.getFallbackResponse(selectedScenario.id, currentInput);
       const aiMessage = {
         id: messages.length + 2,
         type: 'ai',
@@ -409,6 +423,14 @@ const DailyScenario = () => {
                         <span>AI API Key Configured ✓</span>
                       </div>
                     )}
+                    
+                    {/* Debug Info */}
+                    <div className="mt-4 p-3 bg-gray-100 rounded-lg text-xs text-gray-600">
+                      <div className="font-semibold mb-1">Debug Info:</div>
+                      <div>API Key: {apiKey ? '✅ Loaded' : '❌ Missing'}</div>
+                      <div>Service Ready: {conversationService.apiKey ? '✅ Yes' : '❌ No'}</div>
+                      <div>Scenario: {selectedScenario?.id || 'None'}</div>
+                    </div>
                    
                    <button
                      onClick={() => setSelectedScenario(null)}

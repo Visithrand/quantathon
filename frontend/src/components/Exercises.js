@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { exerciseData } from '../data/exercises';
 import AudioRecorder from './AudioRecorder';
 import AnalysisResults from './AnalysisResults';
+import BackButton from './BackButton';
 
 function Exercises({ isRecording, audioUrl, startRecording, stopRecording, submitAudio, setAudioUrl }) {
   const [currentExerciseType, setCurrentExerciseType] = useState('words');
@@ -63,6 +64,13 @@ function Exercises({ isRecording, audioUrl, startRecording, stopRecording, submi
 
   return (
     <div className="space-y-6">
+      {/* Back Button */}
+      <div className="mb-6">
+        <BackButton to="/home" variant="outline">
+          Back to Home
+        </BackButton>
+      </div>
+      
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Speech Exercises 🎯</h2>
         <p className="text-gray-600">Choose an exercise type and start practicing!</p>

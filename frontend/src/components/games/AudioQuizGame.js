@@ -23,8 +23,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
   const questions = [
     {
       question: "What animal makes this sound?",
-      soundToSpeak: "Woof woof! (Sound of a dog barking)",
-      soundDescription: "A friendly dog barking: Woof woof!",
+      soundToSpeak: "Woof woof!",
+      soundDescription: "Woof woof!",
       options: ["Dog", "Cat", "Bird", "Cow"],
       correctAnswer: "Dog",
       difficulty: 'beginner',
@@ -34,7 +34,7 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     {
       question: "Which word rhymes with 'cat'?",
       soundToSpeak: "Cat. Bat.",
-      soundDescription: "Listen carefully: Cat... Bat...",
+      soundDescription: "Cat... Bat...",
       options: ["Bat", "Dog", "Hat", "Run"],
       correctAnswer: "Bat",
       difficulty: 'beginner',
@@ -43,8 +43,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     },
     {
       question: "What emotion does this voice express?",
-      soundToSpeak: "Ha ha ha! (Sound of happy laughter)",
-      soundDescription: "A joyful laugh: Ha ha ha!",
+      soundToSpeak: "Ha ha ha!",
+      soundDescription: "Ha ha ha!",
       options: ["Happy", "Sad", "Angry", "Surprised"],
       correctAnswer: "Happy",
       difficulty: 'intermediate',
@@ -53,8 +53,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     },
     {
       question: "Which syllable is stressed in this word?",
-      soundToSpeak: "Beautiful. (Speaking the word 'beautiful')",
-      soundDescription: "Listen to the word stress: Beau-ti-ful",
+      soundToSpeak: "Beautiful.",
+      soundDescription: "Beautiful",
       options: ["Beau-", "-ti-", "-ful", "Equal stress"],
       correctAnswer: "Beau-",
       difficulty: 'intermediate',
@@ -63,8 +63,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     },
     {
       question: "What type of consonant sound is this?",
-      soundToSpeak: "Ffffff. (Sound of a fricative 'f')",
-      soundDescription: "A continuous fricative sound: Ffffff...",
+      soundToSpeak: "Ffffff.",
+      soundDescription: "Ffffff...",
       options: ["Fricative", "Plosive", "Nasal", "Liquid"],
       correctAnswer: "Fricative",
       difficulty: 'advanced',
@@ -73,8 +73,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     },
     {
       question: "What animal makes this sound?",
-      soundToSpeak: "Meow meow! (Sound of a cat meowing)",
-      soundDescription: "A cat meowing: Meow meow!",
+      soundToSpeak: "Meow meow!",
+      soundDescription: "Meow meow!",
       options: ["Cat", "Dog", "Bird", "Mouse"],
       correctAnswer: "Cat",
       difficulty: 'beginner',
@@ -84,7 +84,7 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     {
       question: "Which word rhymes with 'run'?",
       soundToSpeak: "Run. Fun.",
-      soundDescription: "Listen for the rhyme: Run... Fun...",
+      soundDescription: "Run... Fun...",
       options: ["Fun", "Walk", "Jump", "Stop"],
       correctAnswer: "Fun",
       difficulty: 'beginner',
@@ -93,8 +93,8 @@ const AudioQuizGame = ({ userId, onGameComplete }) => {
     },
     {
       question: "What emotion does this voice express?",
-      soundToSpeak: "Boo hoo... (Sound of crying)",
-      soundDescription: "A sad crying sound: Boo hoo...",
+      soundToSpeak: "Boo hoo...",
+      soundDescription: "Boo hoo...",
       options: ["Sad", "Happy", "Angry", "Surprised"],
       correctAnswer: "Sad",
       difficulty: 'intermediate',

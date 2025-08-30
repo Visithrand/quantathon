@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
 import './Auth.css';
 import { Brain, Play, EyeOff, Eye, Loader, User, Lock, Globe, RefreshCw, CheckCircle, DollarSign, Monitor, CreditCard, Shield, Leaf } from 'lucide-react';
+import BackButton from './BackButton';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -89,6 +90,13 @@ const Login = () => {
 
       {/* Main Container */}
       <div className="w-full max-w-6xl bg-gray-800 rounded-2xl shadow-2xl overflow-hidden relative z-10">
+        {/* Back Button */}
+        <div className="absolute top-4 left-4 z-20">
+          <BackButton to="/" variant="ghost" className="text-white/80 hover:text-white">
+            Back
+          </BackButton>
+        </div>
+        
         <div className="flex">
           {/* Left Panel - Welcome & Sign Up */}
           <div className="w-3/5 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 p-12 flex flex-col justify-center items-center text-center relative overflow-hidden">

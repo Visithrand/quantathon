@@ -22,8 +22,74 @@ import {
   Sparkles,
   Target as TargetIcon,
   Brain,
-  Mic
+  Mic,
+  MessageSquare
 } from 'lucide-react';
+
+// Animated Logo Component
+const AnimatedLogo = () => {
+  return (
+    <div className="flex justify-center mb-8">
+      <div className="relative group">
+        {/* Main Logo Container */}
+        <div className="relative w-32 h-32 bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 rounded-3xl shadow-2xl flex items-center justify-center transform transition-all duration-700 hover:scale-110 hover:rotate-3">
+          {/* Animated Background Rings */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-blue-400 via-purple-400 to-cyan-400 animate-pulse opacity-75"></div>
+          <div className="absolute inset-2 rounded-2xl bg-gradient-to-br from-blue-600 via-purple-600 to-cyan-600"></div>
+          
+          {/* Logo Icon */}
+          <div className="relative z-10 flex items-center justify-center">
+            <div className="relative">
+              {/* Speech Bubble */}
+              <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center shadow-lg transform transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+                <MessageSquare className="w-8 h-8 text-blue-600 group-hover:text-purple-600 transition-colors duration-500" />
+              </div>
+              
+              {/* Sound Waves */}
+              <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 flex space-x-1">
+                <div className="w-1 h-3 bg-white rounded-full animate-pulse" style={{ animationDelay: '0ms' }}></div>
+                <div className="w-1 h-4 bg-white rounded-full animate-pulse" style={{ animationDelay: '150ms' }}></div>
+                <div className="w-1 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: '300ms' }}></div>
+                <div className="w-1 h-4 bg-white rounded-full animate-pulse" style={{ animationDelay: '450ms' }}></div>
+                <div className="w-1 h-3 bg-white rounded-full animate-pulse" style={{ animationDelay: '600ms' }}></div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Floating Elements */}
+          <div className="absolute -top-2 -left-2 w-6 h-6 bg-yellow-400 rounded-full animate-bounce opacity-80 group-hover:animate-spin transition-all duration-500"></div>
+          <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-pink-400 rounded-full animate-bounce opacity-80 group-hover:animate-ping transition-all duration-500" style={{ animationDelay: '0.5s' }}></div>
+          <div className="absolute top-1/2 -left-3 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-60 group-hover:animate-bounce transition-all duration-500"></div>
+          <div className="absolute top-1/2 -right-3 w-3 h-3 bg-orange-400 rounded-full animate-ping opacity-60 group-hover:animate-bounce transition-all duration-500" style={{ animationDelay: '1s' }}></div>
+          
+          {/* Glow Effect */}
+          <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl scale-125"></div>
+        </div>
+        
+        {/* Logo Text */}
+        <div className="text-center mt-6 transform transition-all duration-500 group-hover:scale-105">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-cyan-600 bg-clip-text text-transparent mb-2">
+            SpeechCoach
+          </h1>
+          <p className="text-sm text-slate-600 font-medium tracking-wide group-hover:text-slate-800 transition-colors duration-300">
+            AI-Powered Speech Therapy
+          </p>
+        </div>
+        
+        {/* Animated Border */}
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl scale-110"></div>
+        
+        {/* Particle Effects */}
+        <div className="absolute inset-0 overflow-hidden rounded-3xl pointer-events-none">
+          <div className="absolute top-4 left-4 w-2 h-2 bg-yellow-300 rounded-full animate-ping opacity-60"></div>
+          <div className="absolute top-8 right-6 w-1.5 h-1.5 bg-pink-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.3s' }}></div>
+          <div className="absolute bottom-6 left-8 w-1 h-1 bg-green-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.6s' }}></div>
+          <div className="absolute bottom-8 right-4 w-1.5 h-1.5 bg-blue-300 rounded-full animate-ping opacity-60" style={{ animationDelay: '0.9s' }}></div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Home = () => {
   const { user, logout } = useAuth();
@@ -76,11 +142,11 @@ const Home = () => {
     },
     { 
       id: 'rewards', 
-      name: 'Rewards', 
+      name: 'Points Redemption', 
       icon: <Crown className="w-5 h-5" />, 
       active: false, 
-      path: '/rewards',
-      description: 'Earn achievements and rewards for your practice',
+      path: '/points-redemption',
+      description: 'Redeem your earned points for vouchers, gifts, and rewards',
       gradient: 'from-yellow-500 to-orange-500'
     },
     { 
@@ -173,7 +239,7 @@ const Home = () => {
         </div>
 
         {/* Enhanced Navigation */}
-        <nav className="relative z-10 mt-8 px-6">
+        <nav className="relative z-10 mt-8 px-6 h-[calc(100vh-280px)] overflow-y-auto custom-scrollbar">
           {navigationItems.map((item, index) => (
             <Link
               key={item.id}
@@ -215,7 +281,7 @@ const Home = () => {
           ))}
           
           {/* Enhanced Settings Section */}
-          <div className="mt-8 pt-8 border-t border-slate-700/50">
+          <div className="mt-8 pt-8 border-t border-slate-700/50 pb-6">
             <Link
               to="/settings"
               className="group flex items-center space-x-4 p-5 text-slate-200 hover:bg-gradient-to-r hover:from-slate-700/80 hover:to-slate-600/80 hover:text-white rounded-2xl transition-all duration-300 hover:scale-105 transform"
@@ -241,10 +307,13 @@ const Home = () => {
               <div className="absolute top-0 right-1/4 w-24 h-24 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
               </div>
             
+            {/* Animated Logo */}
+            <AnimatedLogo />
+            
             <div className="inline-flex items-center space-x-3 mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-full shadow-lg">
               <Sparkles className="w-5 h-5 animate-pulse" />
               <span className="text-sm font-medium">AI-Powered Speech Therapy</span>
-          </div>
+            </div>
             
             <h1 className="text-6xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-6 leading-tight">
               Welcome back, {user?.name || 'User'}!
@@ -302,7 +371,7 @@ const Home = () => {
                   
                   <div className="relative p-8">
                     <div className={`w-20 h-20 bg-gradient-to-br ${card.bgGradient} rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
-                      <div className={`text-gradient-to-br ${card.gradient}`}>
+                      <div className="text-slate-700">
                       {card.icon}
                     </div>
                   </div>

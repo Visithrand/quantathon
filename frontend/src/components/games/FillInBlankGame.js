@@ -19,7 +19,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "The ___ is bright in the sky.",
       missingWord: "sun",
-      soundDescription: "Listen: The ___ is bright in the sky. The missing word is 'sun'.",
+      soundDescription: "The ___ is bright in the sky.",
       options: ["sun", "moon", "star", "cloud"],
       difficulty: 'beginner',
       points: 20,
@@ -28,7 +28,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "I love to ___ in the park.",
       missingWord: "play",
-      soundDescription: "Listen: I love to ___ in the park. The missing word is 'play'.",
+      soundDescription: "I love to ___ in the park.",
       options: ["play", "work", "sleep", "eat"],
       difficulty: 'beginner',
       points: 20,
@@ -37,7 +37,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "The ___ is running fast.",
       missingWord: "dog",
-      soundDescription: "Listen: The ___ is running fast. The missing word is 'dog'.",
+      soundDescription: "The ___ is running fast.",
       options: ["dog", "cat", "bird", "fish"],
       difficulty: 'beginner',
       points: 20,
@@ -46,7 +46,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "She has a beautiful ___ voice.",
       missingWord: "singing",
-      soundDescription: "Listen: She has a beautiful ___ voice. The missing word is 'singing'.",
+      soundDescription: "She has a beautiful ___ voice.",
       options: ["singing", "speaking", "laughing", "crying"],
       difficulty: 'intermediate',
       points: 30,
@@ -55,7 +55,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "The ___ is shining through the window.",
       missingWord: "light",
-      soundDescription: "Listen: The ___ is shining through the window. The missing word is 'light'.",
+      soundDescription: "The ___ is shining through the window.",
       options: ["light", "dark", "wind", "rain"],
       difficulty: 'intermediate',
       points: 30,
@@ -64,7 +64,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "He is a very ___ person.",
       missingWord: "friendly",
-      soundDescription: "Listen: He is a very ___ person. The missing word is 'friendly'.",
+      soundDescription: "He is a very ___ person.",
       options: ["friendly", "angry", "sad", "tired"],
       difficulty: 'intermediate',
       points: 30,
@@ -73,7 +73,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "The ___ is a fascinating subject to study.",
       missingWord: "universe",
-      soundDescription: "Listen: The ___ is a fascinating subject to study. The missing word is 'universe'.",
+      soundDescription: "The ___ is a fascinating subject to study.",
       options: ["universe", "ocean", "mountain", "forest"],
       difficulty: 'advanced',
       points: 40,
@@ -82,7 +82,7 @@ const FillInBlankGame = ({ userId, onGameComplete }) => {
     {
       sentence: "She showed great ___ in solving the problem.",
       missingWord: "intelligence",
-      soundDescription: "Listen: She showed great ___ in solving the problem. The missing word is 'intelligence'.",
+      soundDescription: "She showed great ___ in solving the problem.",
       options: ["intelligence", "patience", "courage", "kindness"],
       difficulty: 'advanced',
       points: 40,

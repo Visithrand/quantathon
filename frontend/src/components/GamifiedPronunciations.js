@@ -8,6 +8,7 @@ import SoundMatchingGame from './games/SoundMatchingGame';
 import AudioQuizGame from './games/AudioQuizGame';
 import TimedPronunciationGame from './games/TimedPronunciationGame';
 import PhonemeBlendingGame from './games/PhonemeBlendingGame';
+import BackButton from './BackButton';
 
 const GamifiedPronunciations = ({ userId }) => {
   const [selectedGame, setSelectedGame] = useState(null);
@@ -192,6 +193,13 @@ const GamifiedPronunciations = ({ userId }) => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="bg-white rounded-xl shadow-lg p-6 mb-6">
+          {/* Back Button */}
+          <div className="mb-4">
+            <BackButton to="/home" variant="outline">
+              Back to Home
+            </BackButton>
+          </div>
+          
           <div className="text-center mb-6">
             <Trophy className="w-20 h-20 text-yellow-500 mx-auto mb-4" />
             <h1 className="text-4xl font-bold text-gray-800 mb-2">Gamified Pronunciations</h1>

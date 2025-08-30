@@ -18,7 +18,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
   const rounds = [
     {
       targetSound: "Ssssss",
-      soundDescription: "A continuous hissing sound like a snake: Ssssss...",
+      soundDescription: "Ssssss...",
       options: ["Snake", "Water", "Wind", "Whisper"],
       correctAnswer: "Snake",
       difficulty: 'beginner',
@@ -27,7 +27,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Ch ch ch",
-      soundDescription: "A choppy sound like a train: Ch ch ch...",
+      soundDescription: "Ch ch ch...",
       options: ["Train", "Clock", "Footsteps", "Heartbeat"],
       correctAnswer: "Train",
       difficulty: 'beginner',
@@ -36,7 +36,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Drip drop",
-      soundDescription: "Water droplets falling: Drip... drop...",
+      soundDescription: "Drip... drop...",
       options: ["Rain", "Faucet", "Ocean", "Stream"],
       correctAnswer: "Rain",
       difficulty: 'intermediate',
@@ -45,7 +45,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Buzz buzz",
-      soundDescription: "A bee flying around: Buzz buzz...",
+      soundDescription: "Buzz buzz...",
       options: ["Bee", "Fly", "Mosquito", "Wasp"],
       correctAnswer: "Bee",
       difficulty: 'intermediate',
@@ -54,7 +54,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Thump thump",
-      soundDescription: "A heartbeat sound: Thump... thump...",
+      soundDescription: "Thump... thump...",
       options: ["Heartbeat", "Drum", "Footsteps", "Knock"],
       correctAnswer: "Heartbeat",
       difficulty: 'advanced',
@@ -63,7 +63,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Crackle crackle",
-      soundDescription: "Fire burning: Crackle crackle...",
+      soundDescription: "Crackle crackle...",
       options: ["Fire", "Paper", "Leaves", "Bubble wrap"],
       correctAnswer: "Fire",
       difficulty: 'intermediate',
@@ -72,7 +72,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Splash splash",
-      soundDescription: "Water splashing: Splash splash...",
+      soundDescription: "Splash splash...",
       options: ["Water", "Mud", "Paint", "Oil"],
       correctAnswer: "Water",
       difficulty: 'beginner',
@@ -81,7 +81,7 @@ const SoundMatchingGame = ({ userId, onGameComplete }) => {
     },
     {
       targetSound: "Rustle rustle",
-      soundDescription: "Leaves moving in the wind: Rustle rustle...",
+      soundDescription: "Rustle rustle...",
       options: ["Leaves", "Paper", "Fabric", "Branches"],
       correctAnswer: "Leaves",
       difficulty: 'intermediate',

@@ -20,56 +20,56 @@ const WordRepetitionGame = ({ userId, onGameComplete }) => {
   const words = [
     {
       word: "butterfly",
-      soundDescription: "Listen carefully: Butterfly. Say it clearly and repeat after me!",
+      soundDescription: "Butterfly",
       difficulty: 'beginner',
       points: 20,
       category: 'Word Repetition'
     },
     {
       word: "elephant",
-      soundDescription: "Listen carefully: Elephant. Pronounce each syllable clearly!",
+      soundDescription: "Elephant",
       difficulty: 'beginner',
       points: 20,
       category: 'Word Repetition'
     },
     {
       word: "beautiful",
-      soundDescription: "Listen carefully: Beautiful. Focus on the stress pattern!",
+      soundDescription: "Beautiful",
       difficulty: 'intermediate',
       points: 30,
       category: 'Word Repetition'
     },
     {
       word: "adventure",
-      soundDescription: "Listen carefully: Adventure. Emphasize the correct syllables!",
+      soundDescription: "Adventure",
       difficulty: 'intermediate',
       points: 30,
       category: 'Word Repetition'
     },
     {
       word: "extraordinary",
-      soundDescription: "Listen carefully: Extraordinary. Break it down: ex-tra-or-di-na-ry!",
+      soundDescription: "Extraordinary",
       difficulty: 'advanced',
       points: 40,
       category: 'Word Repetition'
     },
     {
       word: "responsibility",
-      soundDescription: "Listen carefully: Responsibility. Take your time with each part!",
+      soundDescription: "Responsibility",
       difficulty: 'advanced',
       points: 40,
       category: 'Word Repetition'
     },
     {
       word: "communication",
-      soundDescription: "Listen carefully: Communication. Speak it with confidence!",
+      soundDescription: "Communication",
       difficulty: 'intermediate',
       points: 30,
       category: 'Word Repetition'
     },
     {
       word: "imagination",
-      soundDescription: "Listen carefully: Imagination. Let your creativity flow!",
+      soundDescription: "Imagination",
       difficulty: 'intermediate',
       points: 30,
       category: 'Word Repetition'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import BackButton from './BackButton';
 
 function AIExercises({ userId }) {
   const [aiExercises, setAiExercises] = useState([]);
@@ -158,6 +159,13 @@ function AIExercises({ userId }) {
     <div className="space-y-8">
       {/* Header Section */}
       <div className="bg-white rounded-lg shadow-md p-6">
+        {/* Back Button */}
+        <div className="mb-4">
+          <BackButton to="/home" variant="outline">
+            Back to Home
+          </BackButton>
+        </div>
+        
         <h2 className="text-2xl font-bold text-gray-800 mb-4">🤖 AI-Powered Speech Therapy</h2>
         <p className="text-gray-600 mb-6">
           Get personalized exercises and real-time fluency analysis to improve your speech skills.

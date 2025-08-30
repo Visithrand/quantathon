@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Search, Filter, Play, Clock, Target, TrendingUp, BookOpen, Star } from 'lucide-react';
 import DatabaseExerciseService from '../services/databaseExerciseService';
+import BackButton from './BackButton';
 
 const DatabaseExercises = () => {
   const [exercises, setExercises] = useState([]);
@@ -172,6 +173,13 @@ const DatabaseExercises = () => {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
+          {/* Back Button */}
+          <div className="mb-6">
+            <BackButton to="/home" variant="outline">
+              Back to Home
+            </BackButton>
+          </div>
+          
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Speech Therapy Exercises
           </h1>

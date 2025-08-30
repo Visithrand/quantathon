@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import BackButton from './BackButton';
 
 function Settings() {
   const [settings, setSettings] = useState({
@@ -25,6 +26,13 @@ function Settings() {
 
   return (
     <div className="space-y-6">
+      {/* Back Button */}
+      <div className="mb-6">
+        <BackButton to="/home" variant="outline">
+          Back to Home
+        </BackButton>
+      </div>
+      
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Settings ⚙️</h2>
         <p className="text-gray-600">Customize your speech therapy experience</p>

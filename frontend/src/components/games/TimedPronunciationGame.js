@@ -20,7 +20,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
   const rounds = [
     {
       targetWord: "butterfly",
-      soundDescription: "Listen carefully: Butterfly. Say it clearly and quickly!",
+      soundDescription: "Butterfly",
       timeLimit: 5000,
       difficulty: 'beginner',
       points: 20,
@@ -28,7 +28,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "elephant",
-      soundDescription: "Listen carefully: Elephant. Pronounce each syllable clearly!",
+      soundDescription: "Elephant",
       timeLimit: 6000,
       difficulty: 'beginner',
       points: 20,
@@ -36,7 +36,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "beautiful",
-      soundDescription: "Listen carefully: Beautiful. Focus on the stress pattern!",
+      soundDescription: "Beautiful",
       timeLimit: 7000,
       difficulty: 'intermediate',
       points: 30,
@@ -44,7 +44,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "adventure",
-      soundDescription: "Listen carefully: Adventure. Emphasize the correct syllables!",
+      soundDescription: "Adventure",
       timeLimit: 8000,
       difficulty: 'intermediate',
       points: 30,
@@ -52,7 +52,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "extraordinary",
-      soundDescription: "Listen carefully: Extraordinary. Break it down: ex-tra-or-di-na-ry!",
+      soundDescription: "Extraordinary",
       timeLimit: 10000,
       difficulty: 'advanced',
       points: 40,
@@ -60,7 +60,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "responsibility",
-      soundDescription: "Listen carefully: Responsibility. Take your time with each part!",
+      soundDescription: "Responsibility",
       timeLimit: 12000,
       difficulty: 'advanced',
       points: 40,
@@ -68,7 +68,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "communication",
-      soundDescription: "Listen carefully: Communication. Speak it with confidence!",
+      soundDescription: "Communication",
       timeLimit: 9000,
       difficulty: 'intermediate',
       points: 30,
@@ -76,7 +76,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
     },
     {
       targetWord: "imagination",
-      soundDescription: "Listen carefully: Imagination. Let your creativity flow!",
+      soundDescription: "Imagination",
       timeLimit: 8000,
       difficulty: 'intermediate',
       points: 30,
@@ -115,11 +115,11 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
 
   const startGame = () => {
     setGameState('playing');
-    setCurrentWord(words[0]);
+    setCurrentWord(rounds[0]);
     setGameProgress(0);
     setScore(0);
     setAttempts(0);
-    setTimeLeft(words[0].timeLimit);
+    setTimeLeft(rounds[0].timeLimit);
     setTimeStarted(Date.now());
   };
 
@@ -218,13 +218,13 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
 
   const nextWord = () => {
     const nextIndex = currentWordIndex + 1;
-    if (nextIndex < words.length) {
+    if (nextIndex < rounds.length) {
       setCurrentWordIndex(nextIndex);
-      setCurrentWord(words[nextIndex]);
-      setGameProgress((nextIndex / words.length) * 100);
+      setCurrentWord(rounds[nextIndex]);
+      setGameProgress((nextIndex / rounds.length) * 100);
       setAttempts(0);
       setFeedback('');
-      setTimeLeft(words[nextIndex].timeLimit);
+      setTimeLeft(rounds[nextIndex].timeLimit);
       setTimeStarted(Date.now());
     } else {
       completeGame();
@@ -238,12 +238,12 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
       userId,
       gameId: 'timed-pronunciation',
       points: score,
-      accuracy: Math.round((score / words.reduce((sum, w) => sum + w.points, 0)) * 100),
+      accuracy: Math.round((score / rounds.reduce((sum, w) => sum + w.points, 0)) * 100),
       attempts: attempts,
       totalTime: Date.now() - (timeStarted || Date.now()),
       timestamp: new Date().toISOString(),
       difficulty: 'mixed',
-      wordsCompleted: words.length
+      wordsCompleted: rounds.length
     };
 
     try {
@@ -335,7 +335,7 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
         <h2 className="text-2xl font-bold text-gray-800 mb-2">Timed Challenge</h2>
         <div className="flex justify-between items-center mb-4">
           <span className="text-sm text-gray-600">Score: {score}</span>
-          <span className="text-sm text-gray-600">Word {currentWordIndex + 1}/{words.length}</span>
+          <span className="text-sm text-gray-600">Word {currentWordIndex + 1}/{rounds.length}</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2">
           <div 
@@ -352,12 +352,12 @@ const TimedPronunciationGame = ({ userId, onGameComplete }) => {
         </div>
         <div className="text-sm text-gray-600 mb-4">Time Remaining</div>
         
-        <div className="text-3xl font-bold text-gray-800 mb-4">{currentWord.word}</div>
+        <div className="text-3xl font-bold text-gray-800 mb-4">{currentWord.targetWord}</div>
         <div className="text-sm text-gray-500 mb-4">Difficulty: {currentWord.difficulty}</div>
         
         <div className="space-y-3">
           <button
-            onClick={playWord}
+            onClick={playTargetWord}
             disabled={isPlaying}
             className="flex items-center justify-center w-full bg-green-500 text-white px-4 py-3 rounded-lg font-semibold hover:bg-green-600 transition-colors disabled:opacity-50"
           >

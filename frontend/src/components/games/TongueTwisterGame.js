@@ -20,56 +20,56 @@ const TongueTwisterGame = ({ userId, onGameComplete }) => {
   const tongueTwisters = [
     {
       text: "Peter Piper picked a peck of pickled peppers.",
-      soundDescription: "Listen carefully: Peter Piper picked a peck of pickled peppers. Say it three times fast!",
+      soundDescription: "Peter Piper picked a peck of pickled peppers.",
       difficulty: 'beginner',
       points: 20,
       category: 'Tongue Twister'
     },
     {
       text: "She sells seashells by the seashore.",
-      soundDescription: "Listen carefully: She sells seashells by the seashore. Try to say it quickly!",
+      soundDescription: "She sells seashells by the seashore.",
       difficulty: 'beginner',
       points: 20,
       category: 'Tongue Twister'
     },
     {
       text: "How much wood would a woodchuck chuck?",
-      soundDescription: "Listen carefully: How much wood would a woodchuck chuck? Focus on the 'w' sounds!",
+      soundDescription: "How much wood would a woodchuck chuck?",
       difficulty: 'intermediate',
       points: 30,
       category: 'Tongue Twister'
     },
     {
       text: "A proper copper coffee pot.",
-      soundDescription: "Listen carefully: A proper copper coffee pot. Emphasize each 'p' sound!",
+      soundDescription: "A proper copper coffee pot.",
       difficulty: 'intermediate',
       points: 30,
       category: 'Tongue Twister'
     },
     {
       text: "The sixth sick sheik's sixth sheep's sick.",
-      soundDescription: "Listen carefully: The sixth sick sheik's sixth sheep's sick. This is a challenging one!",
+      soundDescription: "The sixth sick sheik's sixth sheep's sick.",
       difficulty: 'advanced',
       points: 40,
       category: 'Tongue Twister'
     },
     {
       text: "Betty Botter bought some butter.",
-      soundDescription: "Listen carefully: Betty Botter bought some butter. But the butter was bitter!",
+      soundDescription: "Betty Botter bought some butter.",
       difficulty: 'intermediate',
       points: 30,
       category: 'Tongue Twister'
     },
     {
       text: "Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair.",
-      soundDescription: "Listen carefully: Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair. Say it with rhythm!",
+      soundDescription: "Fuzzy Wuzzy was a bear. Fuzzy Wuzzy had no hair.",
       difficulty: 'beginner',
       points: 20,
       category: 'Tongue Twister'
     },
     {
       text: "I scream, you scream, we all scream for ice cream.",
-      soundDescription: "Listen carefully: I scream, you scream, we all scream for ice cream. Make it fun!",
+      soundDescription: "I scream, you scream, we all scream for ice cream.",
       difficulty: 'intermediate',
       points: 30,
       category: 'Tongue Twister'

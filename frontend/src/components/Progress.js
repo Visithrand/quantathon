@@ -22,6 +22,7 @@ import {
   BookOpen,
   ArrowLeft
 } from 'lucide-react';
+import BackButton from './BackButton';
 
 const Progress = () => {
   const { user } = useAuth();
@@ -186,13 +187,7 @@ const Progress = () => {
       <main className="p-12">
         {/* Back Button */}
         <div className="mb-8">
-          <button
-            onClick={handleGoBack}
-            className="group flex items-center space-x-3 bg-gradient-to-r from-slate-600 to-slate-700 hover:from-slate-700 hover:to-slate-800 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
-          >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
-            <span>Go Back</span>
-          </button>
+          <BackButton />
         </div>
 
         {/* Enhanced Welcome Section */}

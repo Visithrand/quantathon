@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, Star, Target, Clock, Zap } from 'lucide-react';
+import BackButton from './BackButton';
 
 /**
  * ExerciseCard Component
@@ -75,6 +76,13 @@ function ExerciseCard({ exercise, onSelect, isSelected, difficulty, category }) 
       }`}
       onClick={() => onSelect(exercise)}
     >
+      {/* Back Button */}
+      <div className="mb-3">
+        <BackButton to="/home" variant="ghost" className="text-slate-600 hover:text-slate-800">
+          Back
+        </BackButton>
+      </div>
+      
       {/* Header with completion status */}
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-2">

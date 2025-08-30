@@ -3,6 +3,7 @@ import {
   Play, Pause, Square, Mic, Volume2, Clock, Target, 
   CheckCircle, XCircle, ArrowLeft, Trophy, BarChart3 
 } from 'lucide-react';
+import BackButton from './BackButton';
 
 const ExerciseModule = ({ exercise, onComplete, onBack, userProgress }) => {
   const [isActive, setIsActive] = useState(false);
@@ -422,13 +423,9 @@ const ExerciseModule = ({ exercise, onComplete, onBack, userProgress }) => {
       <div className="bg-black/20 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            <button
-              onClick={onBack}
-              className="flex items-center space-x-2 text-white/80 hover:text-white transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Dashboard</span>
-            </button>
+            <BackButton onClick={onBack} variant="ghost" className="text-white/80 hover:text-white">
+              Back to Dashboard
+            </BackButton>
             
             <div className="text-center">
               <h1 className="text-2xl font-bold text-white">{exercise.title}</h1>

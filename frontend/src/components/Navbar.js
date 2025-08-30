@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import './Navbar.css';
+import BackButton from './BackButton';
 
 function Navbar({ user }) {
   const { logout } = useAuth();
@@ -15,6 +16,9 @@ function Navbar({ user }) {
         
         <div className="navbar-menu">
           <div className="navbar-user">
+            <BackButton to="/home" variant="ghost" className="mr-4">
+              Back to Home
+            </BackButton>
             <span className="user-name">Welcome, {user?.name || 'User'}</span>
             <button onClick={logout} className="logout-button">
               <span>Logout</span>

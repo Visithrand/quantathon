@@ -1,4 +1,5 @@
 import React from 'react';
+import BackButton from './BackButton';
 
 function AnalysisResults({ result }) {
   const getScoreColor = (score) => {
@@ -22,6 +23,13 @@ function AnalysisResults({ result }) {
 
   return (
     <div className="mt-6 p-6 bg-gray-50 rounded-lg">
+      {/* Back Button */}
+      <div className="mb-4">
+        <BackButton to="/home" variant="outline">
+          Back to Home
+        </BackButton>
+      </div>
+      
       <h4 className="text-lg font-semibold text-gray-900 mb-4">📊 Analysis Results</h4>
       
       {/* Score Cards */}

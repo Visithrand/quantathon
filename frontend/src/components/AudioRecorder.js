@@ -1,8 +1,16 @@
 import React from 'react';
+import BackButton from './BackButton'; // Added import for BackButton
 
 function AudioRecorder({ isRecording, audioUrl, startRecording, stopRecording, resetRecording, handleAnalyzeAudio, isAnalyzing }) {
   return (
     <div className="space-y-4">
+      {/* Back Button */}
+      <div className="mb-4">
+        <BackButton to="/home" variant="outline">
+          Back to Home
+        </BackButton>
+      </div>
+      
       <div className="flex justify-center space-x-4">
         {!isRecording && !audioUrl && (
           <button

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, VolumeX, Settings, Play, Pause, RotateCcw } from 'lucide-react';
+import BackButton from './BackButton';
 
 /**
  * VoiceFeedback Component
@@ -193,7 +194,12 @@ function VoiceFeedback({
     <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h4 className="text-lg font-medium text-blue-900">AI Voice Feedback</h4>
+        <div className="flex items-center gap-3">
+          <BackButton to="/home" variant="ghost" className="text-blue-600 hover:text-blue-800">
+            Back
+          </BackButton>
+          <h4 className="text-lg font-medium text-blue-900">AI Voice Feedback</h4>
+        </div>
         <button
           onClick={() => setShowSettings(!showSettings)}
           className="p-2 rounded-lg hover:bg-blue-100 transition-colors"

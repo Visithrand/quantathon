@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getCurrentUser, logoutUser } from '../config/api';
+import BackButton from './BackButton';
 
 /**
  * Sidebar Component
@@ -76,142 +77,184 @@ function Sidebar({ stats = {}, onLogout }) {
   const levelBadge = getLevelBadge(stats.averageScore || 0);
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 h-fit">
-      {/* User Profile Section */}
-      <div className="text-center mb-6 pb-6 border-b border-slate-200">
-        <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-teal-500 rounded-full mx-auto mb-3 flex items-center justify-center">
-          <User className="h-10 w-10 text-white" />
+    <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-6 h-fit max-h-screen overflow-hidden">
+      {/* Scrollable Content Container */}
+      <div className="h-full overflow-y-auto pr-2 custom-scrollbar">
+        {/* Back Button */}
+        <div className="mb-4">
+          <BackButton to="/home" variant="outline">
+            Back to Home
+          </BackButton>
         </div>
-        <h3 className="text-lg font-semibold text-slate-800 mb-1">
-          {currentUser?.name || 'Speech Learner'}
-        </h3>
-        <p className="text-sm text-slate-600 mb-3">
-          {currentUser?.email || 'learner@speechtherapy.com'}
-        </p>
         
-        {/* Level Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full">
-          <span className="text-lg">{levelBadge.icon}</span>
-          <span className={`text-sm font-medium ${levelBadge.color}`}>
-            {levelBadge.label}
-          </span>
-        </div>
-      </div>
-
-      {/* Quick Stats */}
-      <div className="space-y-4 mb-6">
-        <div className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-teal-50 rounded-lg">
-          <div className="flex items-center gap-2">
-            <Trophy className="h-5 w-5 text-purple-600" />
-            <span className="text-sm font-medium text-slate-700">Current Streak</span>
+        {/* User Profile Section */}
+        <div className="text-center mb-6 pb-6 border-b border-slate-200">
+          <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-teal-500 rounded-full mx-auto mb-3 flex items-center justify-center">
+            <User className="h-10 w-10 text-white" />
           </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-purple-600">{getCurrentStreak()}</div>
-            <div className="text-xs text-slate-500">days</div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
-          <div className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-blue-600" />
-            <span className="text-sm font-medium text-slate-700">Exercises</span>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-blue-600">{stats.totalExercises || 0}</div>
-            <div className="text-xs text-slate-500">completed</div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
-          <div className="flex items-center gap-2">
-            <TrendingUp className="h-5 w-5 text-green-600" />
-            <span className="text-sm font-medium text-slate-700">Avg Score</span>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-green-600">
-              {Math.round(stats.averageScore || 0)}%
-            </div>
-            <div className="text-xs text-slate-500">overall</div>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
-          <div className="flex items-center gap-2">
-            <Calendar className="h-5 w-5 text-orange-600" />
-            <span className="text-sm font-medium text-slate-700">This Week</span>
-          </div>
-          <div className="text-right">
-            <div className="text-lg font-bold text-orange-600">{stats.weeklyProgress || 0}</div>
-            <div className="text-xs text-slate-500">sessions</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Streak Achievement */}
-      {getCurrentStreak() > 0 && (
-        <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border border-yellow-200">
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-2xl">{streakBadge.icon}</span>
-            <div>
-              <div className="text-sm font-medium text-yellow-800">
-                {streakBadge.label} Streak
-              </div>
-              <div className="text-xs text-yellow-600">
-                {getCurrentStreak()} consecutive days
-              </div>
-            </div>
-          </div>
-          <div className="w-full bg-yellow-200 rounded-full h-2">
-            <div 
-              className="bg-gradient-to-r from-yellow-400 to-orange-400 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${Math.min((getCurrentStreak() / 30) * 100, 100)}%` }}
-            ></div>
-          </div>
-        </div>
-      )}
-
-      {/* Navigation Menu */}
-      <nav className="space-y-2 mb-6">
-        {navigationItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = location.pathname === item.path;
+          <h3 className="text-lg font-semibold text-slate-800 mb-1">
+            {currentUser?.name || 'Speech Learner'}
+          </h3>
+          <p className="text-sm text-slate-600 mb-3">
+            {currentUser?.email || 'learner@speechtherapy.com'}
+          </p>
           
-          return (
-            <button
-              key={item.name}
-              onClick={() => handleNavigation(item.path)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
-                isActive
-                  ? 'bg-purple-100 text-purple-700 border border-purple-200'
-                  : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800'
-              }`}
-            >
-              <Icon className={`h-5 w-5 ${isActive ? 'text-purple-600' : item.color}`} />
-              <span className="font-medium">{item.name}</span>
-            </button>
-          );
-        })}
-      </nav>
-
-      {/* Logout Button */}
-      <button
-        onClick={handleLogout}
-        className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-      >
-        <LogOut className="h-5 w-5" />
-        <span className="font-medium">Logout</span>
-      </button>
-
-      {/* Motivational Quote */}
-      <div className="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200">
-        <div className="flex items-center gap-2 mb-2">
-          <Heart className="h-4 w-4 text-indigo-600" />
-          <span className="text-xs font-medium text-indigo-800">Daily Motivation</span>
+          {/* Level Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-slate-100 rounded-full">
+            <span className="text-lg">{levelBadge.icon}</span>
+            <span className={`text-sm font-medium ${levelBadge.color}`}>
+              {levelBadge.label}
+            </span>
+          </div>
         </div>
-        <p className="text-xs text-indigo-700 leading-relaxed">
-          "Every word you practice brings you closer to clear, confident communication."
-        </p>
+
+        {/* Quick Stats */}
+        <div className="space-y-4 mb-6">
+          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-teal-50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <Trophy className="h-5 w-5 text-purple-600" />
+              <span className="text-sm font-medium text-slate-700">Current Streak</span>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-purple-600">{getCurrentStreak()}</div>
+              <div className="text-xs text-slate-500">days</div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-blue-600" />
+              <span className="text-sm font-medium text-slate-700">Exercises</span>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-blue-600">{stats.totalExercises || 0}</div>
+              <div className="text-xs text-slate-500">completed</div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <TrendingUp className="h-5 w-5 text-green-600" />
+              <span className="text-sm font-medium text-slate-700">Avg Score</span>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-green-600">
+                {Math.round(stats.averageScore || 0)}%
+              </div>
+              <div className="text-xs text-slate-500">overall</div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-red-50 rounded-lg">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-5 w-5 text-orange-600" />
+              <span className="text-sm font-medium text-slate-700">This Week</span>
+            </div>
+            <div className="text-right">
+              <div className="text-lg font-bold text-orange-600">{stats.weeklyProgress || 0}</div>
+              <div className="text-xs text-slate-500">sessions</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Streak Achievement */}
+        {getCurrentStreak() > 0 && (
+          <div className="mb-6 p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border border-yellow-200">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">{streakBadge.icon}</span>
+              <div>
+                <div className="text-sm font-medium text-yellow-800">
+                  {streakBadge.label} Streak
+                </div>
+                <div className="text-xs text-yellow-600">
+                  {getCurrentStreak()} consecutive days
+                </div>
+              </div>
+            </div>
+            <div className="w-full bg-yellow-200 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-yellow-400 to-orange-400 h-2 rounded-full transition-all duration-300"
+                style={{ width: `${Math.min((getCurrentStreak() / 30) * 100, 100)}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+
+        {/* Navigation Menu */}
+        <nav className="space-y-2 mb-6">
+          {navigationItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleNavigation(item.path)}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-left transition-all duration-200 ${
+                  isActive
+                    ? 'bg-purple-100 text-purple-700 border border-purple-200'
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800'
+                }`}
+              >
+                <Icon className={`h-5 w-5 ${isActive ? 'text-purple-600' : item.color}`} />
+                <span className="font-medium">{item.name}</span>
+              </button>
+            );
+          })}
+        </nav>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+        >
+          <LogOut className="h-5 w-5" />
+          <span className="font-medium">Logout</span>
+        </button>
+
+        {/* Motivational Quote */}
+        <div className="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border border-indigo-200">
+          <div className="flex items-center gap-2 mb-2">
+            <Heart className="h-4 w-4 text-indigo-600" />
+            <span className="text-xs font-medium text-indigo-800">Daily Motivation</span>
+          </div>
+          <p className="text-xs text-indigo-700 leading-relaxed">
+            "Every word you practice brings you closer to clear, confident communication."
+          </p>
+        </div>
       </div>
+
+      {/* Custom Scrollbar Styles */}
+      <style jsx>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 3px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+          transition: background 0.2s ease;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:active {
+          background: #64748b;
+        }
+        
+        /* Firefox scrollbar */
+        .custom-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #cbd5e1 #f1f5f9;
+        }
+      `}</style>
     </div>
   );
 }

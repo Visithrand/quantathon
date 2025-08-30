@@ -22,6 +22,7 @@ import {
     AlertCircle
 } from 'lucide-react';
 import { DatabaseExerciseService } from '../services/databaseExerciseService';
+import BackButton from './BackButton';
 
 const ExerciseDashboard = () => {
     const [mappedExercises, setMappedExercises] = useState(null);
@@ -183,6 +184,13 @@ const ExerciseDashboard = () => {
             {/* Header */}
             <div className="bg-white shadow-sm border-b border-gray-200">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                    {/* Back Button */}
+                    <div className="mb-4">
+                        <BackButton to="/home" variant="outline">
+                            Back to Home
+                        </BackButton>
+                    </div>
+                    
                     <div className="flex items-center justify-between">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 flex items-center gap-3">

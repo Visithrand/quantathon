@@ -17,6 +17,7 @@ import {
   Cell
 } from 'recharts';
 import { TrendingUp, Target, Activity, Star } from 'lucide-react';
+import BackButton from './BackButton';
 
 /**
  * ProgressChart Component
@@ -250,9 +251,14 @@ function ProgressChart({ type = 'line', data = [], title, config = {}, height = 
     <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
       {/* Chart Header */}
       {title && (
-        <div className="flex items-center gap-2 mb-4">
-          {getChartIcon()}
-          <h3 className="text-lg font-semibold text-slate-800">{title}</h3>
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2">
+            {getChartIcon()}
+            <h3 className="text-lg font-semibold text-slate-800">{title}</h3>
+          </div>
+          <BackButton to="/home" variant="ghost" className="text-slate-600 hover:text-slate-800">
+            Back
+          </BackButton>
         </div>
       )}
 

@@ -36,6 +36,7 @@ import {
   AlertCircle,
   TrendingUp as TrendingUpIcon
 } from 'lucide-react';
+import BackButton from './BackButton';
 
 const Storytelling = () => {
   const { user, logout } = useAuth();
@@ -957,6 +958,13 @@ const Storytelling = () => {
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
               Read stories aloud and get AI-powered feedback on your pronunciation and reading skills
             </p>
+          </div>
+
+          {/* Back Button */}
+          <div className="max-w-4xl mx-auto mb-6">
+            <BackButton to="/home" variant="outline">
+              Back to Home
+            </BackButton>
           </div>
 
           {/* Story Card */}

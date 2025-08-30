@@ -19,7 +19,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["c", "a", "t"],
       targetWord: "cat",
-      soundDescription: "Listen carefully: C... A... T... Now blend them together: Cat",
+      soundDescription: "C... A... T...",
       difficulty: 'beginner',
       points: 20,
       category: 'Phoneme Blending'
@@ -27,7 +27,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["d", "o", "g"],
       targetWord: "dog",
-      soundDescription: "Listen carefully: D... O... G... Now blend them together: Dog",
+      soundDescription: "D... O... G...",
       difficulty: 'beginner',
       points: 20,
       category: 'Phoneme Blending'
@@ -35,7 +35,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["h", "a", "t"],
       targetWord: "hat",
-      soundDescription: "Listen carefully: H... A... T... Now blend them together: Hat",
+      soundDescription: "H... A... T...",
       difficulty: 'beginner',
       points: 20,
       category: 'Phoneme Blending'
@@ -43,7 +43,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["s", "u", "n"],
       targetWord: "sun",
-      soundDescription: "Listen carefully: S... U... N... Now blend them together: Sun",
+      soundDescription: "S... U... N...",
       difficulty: 'intermediate',
       points: 30,
       category: 'Phoneme Blending'
@@ -51,7 +51,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["m", "o", "o", "n"],
       targetWord: "moon",
-      soundDescription: "Listen carefully: M... OO... N... Now blend them together: Moon",
+      soundDescription: "M... OO... N...",
       difficulty: 'intermediate',
       points: 30,
       category: 'Phoneme Blending'
@@ -59,7 +59,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["s", "t", "a", "r"],
       targetWord: "star",
-      soundDescription: "Listen carefully: S... T... A... R... Now blend them together: Star",
+      soundDescription: "S... T... A... R...",
       difficulty: 'intermediate',
       points: 30,
       category: 'Phoneme Blending'
@@ -67,7 +67,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["b", "e", "a", "u", "t", "i", "f", "u", "l"],
       targetWord: "beautiful",
-      soundDescription: "Listen carefully: B... E... A... U... T... I... F... U... L... Now blend them together: Beautiful",
+      soundDescription: "B... E... A... U... T... I... F... U... L...",
       difficulty: 'advanced',
       points: 40,
       category: 'Phoneme Blending'
@@ -75,7 +75,7 @@ const PhonemeBlendingGame = ({ userId, onGameComplete }) => {
     {
       phonemes: ["e", "x", "c", "i", "t", "i", "n", "g"],
       targetWord: "exciting",
-      soundDescription: "Listen carefully: E... X... C... I... T... I... N... G... Now blend them together: Exciting",
+      soundDescription: "E... X... C... I... T... I... N... G...",
       difficulty: 'advanced',
       points: 40,
       category: 'Phoneme Blending'

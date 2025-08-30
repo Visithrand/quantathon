@@ -29,8 +29,11 @@ import {
   Lock
 } from 'lucide-react';
 import ExerciseModule from './ExerciseModule';
+import { useAuth } from '../contexts/AuthContext';
+import BackButton from './BackButton';
 
 function Dashboard({ setCurrentPage }) {
+  const { user } = useAuth();
   const [activePage, setActivePage] = useState('dashboard');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [selectedType, setSelectedType] = useState('All');
@@ -928,36 +931,33 @@ function Dashboard({ setCurrentPage }) {
                     </>
                   ) : (
                     <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
-                      <span>Refresh Data</span>
+                      <Activity className="w-4 h-4" />
+                      <span>Refresh Progress</span>
                     </>
                   )}
                 </button>
-                <button
-                  onClick={() => {
-                    if (window.confirm('Are you sure you want to reset all progress data? This action cannot be undone.')) {
-                      // Reset progress logic here
-                      console.log('Resetting progress data...');
-                    }
-                  }}
-                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-                >
-                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
-                  <span>Reset Progress</span>
-                </button>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105">
-                <User className="w-7 h-7 text-white" />
-              </div>
+            
+            {/* User Profile Section */}
+            <div className="flex items-center space-x-4">
               <div className="text-right">
-                <span className="text-slate-800 font-semibold text-lg">{user?.name || 'Teen User'}</span>
-                <div className="text-sm text-slate-500">Active Session</div>
+                <p className="font-semibold text-slate-800">{user?.name || 'User'}</p>
+                <p className="text-sm text-slate-600">{user?.email || 'user@example.com'}</p>
+              </div>
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
+                <User className="w-6 h-6 text-white" />
               </div>
             </div>
           </div>
         </header>
+
+        {/* Back Button */}
+        <div className="px-8 py-4">
+          <BackButton to="/home" variant="outline" className="mb-4">
+            Back to Home
+          </BackButton>
+        </div>
 
         {/* Enhanced Main Content Area */}
         <main className="p-12">

@@ -180,7 +180,7 @@ const Progress = () => {
       </div>
     );
   }
-
+  
   return (
     <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       <main className="p-12">
@@ -214,7 +214,7 @@ const Progress = () => {
           <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
             Track your speech therapy journey with real-time analytics and personalized insights
           </p>
-        </div>
+      </div>
 
         {/* Real-Time Progress Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-16">
@@ -230,7 +230,7 @@ const Progress = () => {
               <div className="text-lg font-semibold text-slate-800 mb-2">Total Points</div>
               <div className="text-sm text-slate-500">+{realTimeStats.todayExercises * 10} this week</div>
             </div>
-          </div>
+        </div>
 
           <div className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 transform border border-slate-200/50">
             <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -244,7 +244,7 @@ const Progress = () => {
               <div className="text-lg font-semibold text-slate-800 mb-2">Exercises Completed</div>
               <div className="text-sm text-slate-500">+{realTimeStats.todayExercises} today</div>
             </div>
-          </div>
+        </div>
 
           <div className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 transform border border-slate-200/50">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -258,7 +258,7 @@ const Progress = () => {
               <div className="text-lg font-semibold text-slate-800 mb-2">Day Streak</div>
               <div className="text-sm text-slate-500">Keep it up! 🔥</div>
             </div>
-          </div>
+        </div>
 
           <div className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 transform border border-slate-200/50">
             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-red-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
@@ -272,8 +272,8 @@ const Progress = () => {
               <div className="text-lg font-semibold text-slate-800 mb-2">Average Score</div>
               <div className="text-sm text-slate-500">+{Math.max(0, (progress?.averageScore || 0) - 75)}% improvement</div>
             </div>
-          </div>
         </div>
+      </div>
 
         {/* Weekly Progress Section */}
         <div className="mb-16">
@@ -301,22 +301,22 @@ const Progress = () => {
                   </div>
                   <div className="text-sm text-slate-500">Goal Progress</div>
                 </div>
-              </div>
+          </div>
               <div className="w-full bg-slate-200 rounded-full h-4">
-                <div 
+            <div 
                   className={`h-4 rounded-full bg-gradient-to-r ${getProgressColor(realTimeStats.weeklyGoalProgress)} transition-all duration-1000 ease-out`}
                   style={{width: `${Math.min(100, realTimeStats.weeklyGoalProgress)}%`}}
-                ></div>
-              </div>
-            </div>
-            
+            ></div>
+          </div>
+        </div>
+        
             <div className="space-y-6">
               {getWeekDays().map((date, index) => {
                 const dayData = progress?.weeklyProgress?.[date] || { minutes: 0, exercises: 0, score: 0, percentage: 0 };
                 const dayName = getDayName(date);
                 const isToday = date === new Date().toISOString().split('T')[0];
                 
-                return (
+            return (
                   <div key={date} className={`flex items-center space-x-6 p-4 rounded-2xl transition-all duration-300 ${
                     isToday ? 'bg-gradient-to-r from-blue-50 to-cyan-50 border-2 border-blue-200' : 'hover:bg-slate-50'
                   }`}>
@@ -337,13 +337,13 @@ const Progress = () => {
                         <div 
                           className={`h-3 rounded-full bg-gradient-to-r ${getProgressColor(dayData.percentage)} transition-all duration-1000 ease-out`}
                           style={{width: `${Math.min(100, dayData.percentage)}%`}}
-                        ></div>
-                      </div>
+                  ></div>
+                </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+              </div>
+            );
+          })}
+        </div>
           </div>
         </div>
 
@@ -367,8 +367,8 @@ const Progress = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br opacity-5 group-hover:opacity-10 transition-opacity duration-500"
                      style={{ backgroundImage: `radial-gradient(circle at 20% 80%, ${getAchievementColor(achievement).split(' ')[1]} 0%, transparent 50%)` }}>
-                </div>
-                
+      </div>
+
                 <div className="relative p-8">
                   <div className="flex items-center space-x-6">
                     <div className={`w-20 h-20 bg-gradient-to-br ${getAchievementColor(achievement)} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
@@ -382,10 +382,10 @@ const Progress = () => {
                         {achievement === 'Dedicated Learner' && 'Completed 50 exercises'}
                         {achievement === 'Sound Master' && 'Achieved 85%+ average score'}
                       </p>
-                    </div>
-                  </div>
-                </div>
-                
+              </div>
+            </div>
+          </div>
+          
                 <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${getAchievementColor(achievement)} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}></div>
               </div>
             ))}
@@ -397,9 +397,9 @@ const Progress = () => {
                 <p className="text-slate-500">Complete your first exercise to earn your first achievement!</p>
               </div>
             )}
+            </div>
           </div>
-        </div>
-
+          
         {/* Exercise Type Breakdown */}
         <div className="mb-16">
           <div className="text-center mb-12">
@@ -420,12 +420,12 @@ const Progress = () => {
                 </div>
                 <div className="text-3xl font-bold text-blue-600 mb-2">
                   {progress?.exerciseHistory?.filter(ex => ex.type === 'speech').length || 0}
-                </div>
+              </div>
                 <div className="text-lg font-semibold text-slate-800 mb-2">Speech Exercises</div>
                 <div className="text-sm text-slate-500">Most practiced</div>
-              </div>
             </div>
-            
+          </div>
+          
             <div className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 transform border border-slate-200/50">
               <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative p-8 text-center">
@@ -448,12 +448,12 @@ const Progress = () => {
                 </div>
                 <div className="text-3xl font-bold text-yellow-600 mb-2">
                   {progress?.exerciseHistory?.filter(ex => ex.type === 'conversation').length || 0}
-                </div>
+          </div>
                 <div className="text-lg font-semibold text-slate-800 mb-2">Conversations</div>
                 <div className="text-sm text-slate-500">Keep practicing</div>
-              </div>
-            </div>
-            
+        </div>
+      </div>
+
             <div className="group relative overflow-hidden bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105 transform border border-slate-200/50">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               <div className="relative p-8 text-center">
@@ -468,8 +468,8 @@ const Progress = () => {
               </div>
             </div>
           </div>
-        </div>
-
+          </div>
+          
         {/* Real-Time Activity Monitor */}
         <div className="text-center">
           <h3 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-12">
@@ -486,8 +486,8 @@ const Progress = () => {
                 </div>
                 <div className="text-lg font-semibold text-slate-800 mb-1">Today's Practice</div>
                 <div className="text-sm text-slate-500">Real-time tracking</div>
-              </div>
-              
+          </div>
+          
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <Activity className="w-10 h-10 text-white" />
@@ -497,8 +497,8 @@ const Progress = () => {
                 </div>
                 <div className="text-lg font-semibold text-slate-800 mb-1">Exercises Today</div>
                 <div className="text-sm text-slate-500">Live count</div>
-              </div>
-              
+          </div>
+          
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                   <BarChart3 className="w-10 h-10 text-white" />
@@ -508,9 +508,9 @@ const Progress = () => {
                 </div>
                 <div className="text-lg font-semibold text-slate-800 mb-1">Weekly Goal</div>
                 <div className="text-sm text-slate-500">Current progress</div>
-              </div>
-            </div>
           </div>
+        </div>
+      </div>
         </div>
       </main>
     </div>

@@ -115,11 +115,11 @@ const Storytelling = () => {
       gradient: 'from-green-500 to-emerald-500'
     },
     { 
-      id: 'pronunciation-games', 
+              id: 'games', 
       name: 'Pronunciation Games', 
       icon: <Infinity className="w-5 h-5" />, 
       active: false, 
-      path: '/pronunciation-games',
+              path: '/games',
       description: 'Fun games to improve pronunciation and articulation',
       gradient: 'from-orange-500 to-red-500'
     },

@@ -8,6 +8,7 @@ import Home from './components/Home';
 import Progress from './components/Progress';
 import Storytelling from './components/Storytelling';
 import DailyScenario from './components/DailyScenario';
+import GamifiedPronunciations from './components/GamifiedPronunciations';
 import './App.css';
 
 function App() {
@@ -37,10 +38,12 @@ function App() {
                 if (page === 'storytelling') window.location.href = '/storytelling';
                 if (page === 'daily-scenario') window.location.href = '/daily-scenario';
                 if (page === 'exercises') window.location.href = '/home';
+                if (page === 'games') window.location.href = '/games';
               }} />} />
-                             <Route path="/progress" element={<Progress />} />
-               <Route path="/storytelling" element={<Storytelling />} />
-               <Route path="/daily-scenario" element={<DailyScenario />} />
+              <Route path="/progress" element={<Progress />} />
+              <Route path="/storytelling" element={<Storytelling />} />
+              <Route path="/daily-scenario" element={<DailyScenario />} />
+              <Route path="/games" element={<GamifiedPronunciations userId={user?.id} />} />
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>

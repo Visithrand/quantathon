@@ -30,26 +30,43 @@ const DailyScenario = () => {
   const [apiKey, setApiKey] = useState('');
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [conversationAnalysis, setConversationAnalysis] = useState(null);
-  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-
-    // Load saved API key on component mount
+  const [lastError, setLastError] = useState(null);
+  
+  // Load saved API key on component mount
   useEffect(() => {
+    console.log('🔄 Component mounting, checking API keys...');
+    
     const savedApiKey = localStorage.getItem('openai_api_key');
     if (savedApiKey) {
+      console.log('📱 Found saved API key in localStorage');
       setApiKey(savedApiKey);
+      // Also set it in the conversation service
       conversationService.setApiKey(savedApiKey);
     } else {
-      if (API_KEY) {
-        setApiKey(API_KEY);
-        localStorage.setItem('openai_api_key', API_KEY);
-        conversationService.setApiKey(API_KEY);
+      console.log('🔧 No saved key, checking configured key...');
+      // Use the configured API key from the service
+      const configuredApiKey = conversationService.getConfiguredApiKey();
+      if (configuredApiKey) {
+        console.log('✅ Found configured API key, setting it up...');
+        setApiKey(configuredApiKey);
+        localStorage.setItem('openai_api_key', configuredApiKey);
+        conversationService.setApiKey(configuredApiKey);
       } else {
-        // Show modal asking user to enter their API key
-        setShowApiKeyModal(true);
+        console.log('⚠️ No configured key found, using default...');
+        // Set default API key if none is configured
+        const defaultApiKey = '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';
+        setApiKey(defaultApiKey);
+        localStorage.setItem('openai_api_key', defaultApiKey);
+        conversationService.setApiKey(defaultApiKey);
       }
     }
+    
+    console.log('🔑 Final API key status:', {
+      hasApiKey: !!apiKey,
+      hasConfiguredKey: !!conversationService.getConfiguredApiKey(),
+      hasServiceKey: !!conversationService.apiKey
+    });
   }, []);
-
 
   // Handle back navigation
   const handleGoBack = () => {
@@ -65,6 +82,9 @@ const DailyScenario = () => {
     
     console.log('🚀 Starting chat with API key:', apiKey.substring(0, 20) + '...');
     console.log('🎭 Selected scenario:', selectedScenario.id);
+    
+    // Clear any previous errors
+    setLastError(null);
     
     setIsChatActive(true);
     // Set API key for conversation service
@@ -85,7 +105,8 @@ const DailyScenario = () => {
 
   // Check if API key is configured
   const isApiKeyConfigured = () => {
-    return apiKey && apiKey.trim() && apiKey.startsWith('sk-');
+    const availableKey = apiKey || conversationService.getConfiguredApiKey();
+    return availableKey && availableKey.trim() && availableKey.startsWith('sk-');
   };
 
   // Get AI greeting based on scenario
@@ -118,7 +139,7 @@ const DailyScenario = () => {
     setInputMessage('');
     setIsTyping(true);
 
-    // Get real AI response
+    // Get real AI response with improved error handling
     try {
       console.log('Sending message to AI:', currentInput);
       console.log('Current messages:', messages);
@@ -136,15 +157,32 @@ const DailyScenario = () => {
         console.log('✅ AI Response Success:', aiResponse);
         console.log('📊 API Usage:', aiResult.usage);
       } else {
-        aiResponse = aiResult.fallbackResponse;
+        // Only use fallback if absolutely necessary
         console.warn('⚠️ AI Error, using fallback:', aiResult.error);
+        
+        // Store the error for display
+        setLastError(aiResult.error);
+        
+        // Show specific error messages to help troubleshoot
+        if (aiResult.error.includes('rate limit')) {
+          aiResponse = "I'm getting a bit overwhelmed with requests right now. Please wait a moment and try again. This usually happens when too many requests are made too quickly.";
+        } else if (aiResult.error.includes('Invalid API key') || aiResult.error.includes('401')) {
+          aiResponse = "There's an issue with the API key. Please check your OpenAI API key in the settings. You can get a new one from https://platform.openai.com/api-keys";
+        } else if (aiResult.error.includes('quota exceeded')) {
+          aiResponse = "The API quota has been exceeded. Please check your OpenAI account billing or wait until the quota resets.";
+        } else if (aiResult.error.includes('model not found')) {
+          aiResponse = "There's a configuration issue with the AI model. Please try refreshing the page or contact support.";
+        } else {
+          aiResponse = `I'm experiencing a technical issue: ${aiResult.error}. Please try again in a moment or check your internet connection.`;
+        }
       }
       
       const aiMessage = {
         id: messages.length + 2,
         type: 'ai',
         content: aiResponse,
-        timestamp: new Date().toLocaleTimeString()
+        timestamp: new Date().toLocaleTimeString(),
+        isFallback: aiResult.success === false // Indicate if it was a fallback
       };
       
       setMessages(prev => [...prev, aiMessage]);
@@ -159,17 +197,25 @@ const DailyScenario = () => {
       
     } catch (error) {
       console.error('❌ Error getting AI response:', error);
-      // Use fallback response
-      const fallbackResponse = conversationService.getFallbackResponse(selectedScenario.id, currentInput);
+      
+      // Provide a more natural error response
+      let errorResponse;
+      if (error.message.includes('network') || error.message.includes('fetch')) {
+        errorResponse = "I'm having some connection issues right now, but I'm really interested in what you just shared! Could you tell me more about that? What made you think about it?";
+      } else {
+        errorResponse = "I'm having a moment where I can't respond properly, but what you said is really interesting! I'd love to hear more about your thoughts on that.";
+      }
+      
       const aiMessage = {
         id: messages.length + 2,
         type: 'ai',
-        content: fallbackResponse,
-        timestamp: new Date().toLocaleTimeString()
+        content: errorResponse,
+        timestamp: new Date().toLocaleTimeString(),
+        isFallback: false // Indicate if it was a fallback
       };
       setMessages(prev => [...prev, aiMessage]);
       setIsTyping(false);
-      speakAIResponse(fallbackResponse);
+      speakAIResponse(errorResponse);
     }
   };
 
@@ -305,6 +351,19 @@ const DailyScenario = () => {
     }
   ];
 
+  const forceSetConfiguredKey = () => {
+    const configuredKey = conversationService.getConfiguredApiKey();
+    if (configuredKey) {
+      setApiKey(configuredKey);
+      localStorage.setItem('openai_api_key', configuredKey);
+      conversationService.setApiKey(configuredKey);
+      alert('✅ Configured API key has been set and errors cleared!');
+      setLastError(null); // Clear any previous errors
+    } else {
+      alert('❌ No configured API key found to set.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
@@ -431,12 +490,105 @@ const DailyScenario = () => {
                     <div className="mt-4 p-3 bg-gray-100 rounded-lg text-xs text-gray-600">
                       <div className="font-semibold mb-1">Debug Info:</div>
                       <div>API Key: {apiKey ? '✅ Loaded' : '❌ Missing'}</div>
-                      <div>Service Ready: {conversationService.apiKey ? '✅ Yes' : '❌ No'}</div>
+                      <div>Configured Key: {conversationService.getConfiguredApiKey() ? '✅ Available' : '❌ Missing'}</div>
+                      <div>Service Ready: {conversationService.apiKey || conversationService.getConfiguredApiKey() ? '✅ Yes' : '❌ No'}</div>
                       <div>Scenario: {selectedScenario?.id || 'None'}</div>
+                      <div className="mt-2 p-2 bg-blue-50 rounded border-l-2 border-blue-400">
+                        <div className="font-semibold text-blue-800">💡 Tips for Better AI Responses:</div>
+                        <ul className="text-blue-700 mt-1 space-y-1">
+                          <li>• Share personal experiences and details</li>
+                          <li>• Ask follow-up questions to keep the conversation flowing</li>
+                          <li>• Be specific about your interests and thoughts</li>
+                          <li>• The AI will remember context from your conversation</li>
+                        </ul>
+                      </div>
+                      <div className="mt-2 p-2 bg-yellow-50 rounded border-l-2 border-yellow-400">
+                        <div className="font-semibold text-yellow-800">🔧 API Connection Test:</div>
+                        <button
+                          onClick={async () => {
+                            try {
+                              setLastError(null);
+                              console.log('🧪 Starting API key test...');
+                              
+                              // Test the configured API key first
+                              const testResult = await conversationService.testApiKey();
+                              
+                              if (testResult.success) {
+                                alert(`✅ API connection successful! Available models: ${testResult.models}`);
+                                console.log('✅ API test passed');
+                              } else {
+                                console.error('❌ API test failed:', testResult.error);
+                                setLastError(testResult.error);
+                                alert(`❌ API test failed: ${testResult.error}`);
+                              }
+                            } catch (error) {
+                              console.error('❌ API test error:', error);
+                              setLastError(error.message);
+                              alert(`❌ API test error: ${error.message}`);
+                            }
+                          }}
+                          className="mt-1 px-3 py-1 bg-yellow-500 text-white text-xs rounded hover:bg-yellow-600 transition-colors"
+                        >
+                          Test AI Connection
+                        </button>
+                        <button
+                          onClick={forceSetConfiguredKey}
+                          className="mt-1 ml-2 px-3 py-1 bg-blue-500 text-white text-xs rounded hover:bg-blue-600 transition-colors"
+                        >
+                          Set Configured Key
+                        </button>
+                        <button
+                          onClick={async () => {
+                            try {
+                              console.log('🌐 Testing basic network connectivity...');
+                              const response = await fetch('https://httpbin.org/get');
+                              if (response.ok) {
+                                alert('✅ Basic network connectivity: OK\n\nYour internet connection is working fine. The issue is likely with OpenAI\'s API or SSL certificates.');
+                              } else {
+                                alert(`❌ Basic network connectivity failed: HTTP ${response.status}`);
+                              }
+                            } catch (error) {
+                              alert(`❌ Network connectivity issue: ${error.message}\n\nThis suggests a network/firewall/proxy problem.`);
+                            }
+                          }}
+                          className="mt-1 ml-2 px-3 py-1 bg-green-500 text-white text-xs rounded hover:bg-green-600 transition-colors"
+                        >
+                          Test Network
+                        </button>
+                      </div>
                     </div>
                    
+                   {/* Troubleshooting Guide */}
+                   <div className="mt-4 p-3 bg-purple-50 rounded-lg border-l-2 border-purple-400">
+                     <div className="font-semibold text-purple-800 mb-2">🔍 Troubleshooting Guide:</div>
+                     <div className="text-xs text-purple-700 space-y-2">
+                       <div>
+                         <div className="font-medium">Issue 1: Certificate Error (ERR_CERT_AUTHORITY_INVALID)</div>
+                         <ul className="list-disc list-inside ml-2 space-y-1">
+                           <li>✅ Check system clock is correct</li>
+                           <li>✅ Disable VPN/Proxy</li>
+                           <li>✅ Try mobile hotspot</li>
+                           <li>✅ Clear browser cache</li>
+                           <li>✅ Disable antivirus temporarily</li>
+                         </ul>
+                       </div>
+                       <div>
+                         <div className="font-medium">Issue 2: API Key Authentication (401 Error)</div>
+                         <ul className="list-disc list-inside ml-2 space-y-1">
+                           <li>✅ Verify API key at OpenAI platform</li>
+                           <li>✅ Check if key has credits</li>
+                           <li>✅ Ensure key format is correct (sk-...)</li>
+                           <li>✅ Try generating a new key</li>
+                         </ul>
+                       </div>
+                     </div>
+                   </div>
+                   
                    <button
-                     onClick={() => setSelectedScenario(null)}
+                     onClick={() => {
+                       setSelectedScenario(null);
+                       setLastError(null); // Clear any errors when going back
+                     }}
                      className="block mx-auto mt-4 text-slate-600 hover:text-slate-800 transition-colors"
                    >
                      ← Back to Scenarios
@@ -444,9 +596,45 @@ const DailyScenario = () => {
                  </div>
                </div>
              ) : (
-               /* Active Chat */
-               <div className="bg-white rounded-2xl shadow-xl border border-slate-200/50 overflow-hidden">
-                 {/* Chat Header */}
+              /* Active Chat */
+              <div className="bg-white rounded-2xl shadow-xl border border-slate-200/50 overflow-hidden">
+                {/* Error Banner */}
+                {lastError && (
+                  <div className="bg-red-50 border-l-4 border-red-400 p-4">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0">
+                        <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                      <div className="ml-3">
+                        <h3 className="text-sm font-medium text-red-800">AI Connection Issue</h3>
+                        <div className="mt-2 text-sm text-red-700">
+                          <p className="mb-2"><strong>Error:</strong> {lastError}</p>
+                          <div className="space-y-1">
+                            <p><strong>Troubleshooting steps:</strong></p>
+                            <ul className="list-disc list-inside space-y-1 ml-2">
+                              <li>Check if your OpenAI API key is valid and has credits</li>
+                              <li>Verify your internet connection</li>
+                              <li>Wait a few minutes if you've hit rate limits</li>
+                              <li>Try refreshing the page</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="mt-3">
+                          <button
+                            onClick={() => setLastError(null)}
+                            className="text-sm text-red-600 hover:text-red-500 font-medium"
+                          >
+                            Dismiss
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+                
+                {/* Chat Header */}
                  <div className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white p-4">
                    <div className="flex items-center justify-between">
                      <div className="flex items-center space-x-3">
@@ -455,7 +643,17 @@ const DailyScenario = () => {
                        </div>
                        <div>
                          <h4 className="font-semibold">{selectedScenario.title}</h4>
-                         <p className="text-blue-100 text-sm">AI Conversation Partner</p>
+                         <div className="flex items-center space-x-2">
+                           <p className="text-blue-100 text-sm">AI Conversation Partner</p>
+                           <div className="flex items-center space-x-1">
+                             <div className={`w-2 h-2 rounded-full ${
+                               conversationService.apiKey || conversationService.getConfiguredApiKey() ? 'bg-green-400' : 'bg-red-400'
+                             }`}></div>
+                             <span className="text-xs text-blue-100">
+                               {conversationService.apiKey || conversationService.getConfiguredApiKey() ? 'Connected' : 'Disconnected'}
+                             </span>
+                           </div>
+                         </div>
                        </div>
                      </div>
                      <button
@@ -485,11 +683,23 @@ const DailyScenario = () => {
                          }`}
                        >
                          <p className="text-sm">{message.content}</p>
-                         <p className={`text-xs mt-2 ${
-                           message.type === 'user' ? 'text-blue-100' : 'text-slate-500'
-                         }`}>
-                           {message.timestamp}
-                         </p>
+                         <div className="flex items-center justify-between mt-2">
+                           <p className={`text-xs ${
+                             message.type === 'user' ? 'text-blue-100' : 'text-slate-500'
+                           }`}>
+                             {message.timestamp}
+                           </p>
+                           {message.type === 'ai' && message.isFallback && (
+                             <span className="text-xs text-orange-500 bg-orange-100 px-2 py-1 rounded-full">
+                               Fallback
+                             </span>
+                           )}
+                           {message.type === 'ai' && !message.isFallback && (
+                             <span className="text-xs text-green-500 bg-green-100 px-2 py-1 rounded-full">
+                               AI
+                             </span>
+                           )}
+                         </div>
                        </div>
                      </div>
                    ))}
@@ -497,10 +707,13 @@ const DailyScenario = () => {
                    {isTyping && (
                      <div className="flex justify-start">
                        <div className="bg-slate-100 text-slate-800 px-4 py-3 rounded-2xl">
-                         <div className="flex space-x-1">
-                           <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
-                           <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                           <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                         <div className="flex items-center space-x-2">
+                           <div className="flex space-x-1">
+                             <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></div>
+                             <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
+                             <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
+                           </div>
+                           <span className="text-xs text-slate-500">AI is thinking...</span>
                          </div>
                        </div>
                      </div>

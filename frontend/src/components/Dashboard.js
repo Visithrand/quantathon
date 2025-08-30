@@ -48,7 +48,7 @@ function Dashboard({ setCurrentPage }) {
     { id: 'dashboard', name: 'Dashboard', icon: <Home className="w-5 h-5" />, active: true },
     { id: 'storytelling', name: 'Storytelling', icon: <BookOpen className="w-5 h-5" />, active: false },
     { id: 'daily-scenario', name: 'Daily Scenario', icon: <Users className="w-5 h-5" />, active: false },
-    { id: 'pronunciation-games', name: 'Pronunciation Games', icon: <Infinity className="w-5 h-5" />, active: false },
+    { id: 'games', name: 'Pronunciation Games', icon: <Trophy className="w-5 h-5" />, active: false },
     { id: 'progress', name: 'Progress', icon: <TrendingUp className="w-5 h-5" />, active: false },
     { id: 'rewards', name: 'Rewards', icon: <Crown className="w-5 h-5" />, active: false },
     { id: 'profile', name: 'Profile', icon: <User className="w-5 h-5" />, active: false },
@@ -861,7 +861,7 @@ function Dashboard({ setCurrentPage }) {
             <div className="w-20 h-20 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
               <BookOpen className="w-10 h-10 text-white" />
             </div>
-            <h1 className="text-2xl font-bold text-white mb-2">VocaCare</h1>
+            <h1 className="text-2xl font-bold text-white mb-2">SpeechCoach</h1>
             <p className="text-sm text-blue-200">Speech Therapy for Teens</p>
           </div>
         </div>
@@ -908,18 +908,18 @@ function Dashboard({ setCurrentPage }) {
       {/* Enhanced Main Content */}
       <div className="flex-1 overflow-auto bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
         {/* Enhanced Header */}
-        <header className="bg-white/80 backdrop-blur-sm shadow-lg border-b border-slate-200/50 px-8 py-6">
+        <header className="bg-white/90 backdrop-blur-sm shadow-xl border-b border-slate-200/50 px-8 py-6">
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent">
-                SpeechSpark - Teen
+                SpeechCoach - Teen
               </h1>
-              <p className="text-slate-600 mt-1">Your Personal Speech Therapy Dashboard</p>
-              <div className="flex items-center gap-2 mt-2">
+              <p className="text-slate-600 mt-1 text-lg">Your Personal Speech Therapy Dashboard</p>
+              <div className="flex items-center gap-3 mt-3">
                 <button
                   onClick={fetchRealTimeProgress}
                   disabled={loading}
-                  className="flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm rounded-lg hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 disabled:opacity-50"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm rounded-xl hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 disabled:opacity-50 shadow-lg hover:shadow-xl transform hover:scale-105"
                 >
                   {loading ? (
                     <>
@@ -933,14 +933,26 @@ function Dashboard({ setCurrentPage }) {
                     </>
                   )}
                 </button>
+                <button
+                  onClick={() => {
+                    if (window.confirm('Are you sure you want to reset all progress data? This action cannot be undone.')) {
+                      // Reset progress logic here
+                      console.log('Resetting progress data...');
+                    }
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-500 to-pink-500 text-white text-sm rounded-xl hover:from-red-600 hover:to-pink-600 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                >
+                  <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full"></div>
+                  <span>Reset Progress</span>
+                </button>
               </div>
             </div>
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg">
-                <User className="w-6 h-6 text-white" />
+              <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:scale-105">
+                <User className="w-7 h-7 text-white" />
               </div>
               <div className="text-right">
-                <span className="text-slate-800 font-semibold text-lg">Teen User</span>
+                <span className="text-slate-800 font-semibold text-lg">{user?.name || 'Teen User'}</span>
                 <div className="text-sm text-slate-500">Active Session</div>
               </div>
             </div>
@@ -989,9 +1001,9 @@ function Dashboard({ setCurrentPage }) {
                 </div>
                 <div className="text-6xl text-blue-600 mb-6 font-serif">"</div>
                 <p className="text-2xl italic text-slate-800 mb-6 leading-relaxed">
-                  Your voice matters. Every word you speak brings you closer to confident communication.
-                </p>
-                <div className="text-right">
+                Your voice matters. Every word you speak brings you closer to confident communication.
+              </p>
+              <div className="text-right">
                   <span className="text-lg text-blue-600 font-medium">- Speech Coach Maria</span>
                 </div>
               </div>
@@ -1002,8 +1014,8 @@ function Dashboard({ setCurrentPage }) {
           <div className="mb-16">
             <div className="text-center mb-12">
               <h3 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-4">
-                Why Your Practice Matters
-              </h3>
+              Why Your Practice Matters
+            </h3>
               <p className="text-lg text-slate-600 max-w-2xl mx-auto">
                 Every exercise builds essential skills for confident communication
               </p>
@@ -1019,9 +1031,9 @@ function Dashboard({ setCurrentPage }) {
                   <div className="relative p-8 text-center">
                     <div className="w-20 h-20 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-500 shadow-lg">
                       <div className="text-white">
-                        {card.icon}
-                      </div>
+                      {card.icon}
                     </div>
+                  </div>
                     <h4 className="text-2xl font-bold text-slate-800 mb-4">{card.title}</h4>
                     <p className="text-slate-600 leading-relaxed text-lg">{card.description}</p>
                   </div>
@@ -1039,12 +1051,12 @@ function Dashboard({ setCurrentPage }) {
               <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-slate-200/50 backdrop-blur-sm">
                 <div className="text-center mb-8">
                   <h3 className="text-4xl font-bold bg-gradient-to-r from-slate-800 via-green-800 to-emerald-800 bg-clip-text text-transparent mb-4">
-                    Your Progress This Week
-                  </h3>
+              Your Progress This Week
+            </h3>
                   <p className="text-lg text-slate-600">Track your speech therapy journey and celebrate your achievements</p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                   <div className="group relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl border border-blue-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform">
                     <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative text-center">
@@ -1054,11 +1066,11 @@ function Dashboard({ setCurrentPage }) {
                       <div className="text-3xl font-bold text-blue-600 mb-2">
                         {loading ? '...' : (progressStats?.totalMinutes || 0)}
                       </div>
-                      <div className="text-blue-800 font-medium">Minutes Completed</div>
+                <div className="text-blue-800 font-medium">Minutes Completed</div>
                       <div className="text-sm text-blue-600">of 30 weekly goal</div>
                     </div>
-                  </div>
-                  
+              </div>
+              
                   <div className="group relative overflow-hidden bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl border border-green-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform">
                     <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative text-center">
@@ -1068,11 +1080,11 @@ function Dashboard({ setCurrentPage }) {
                       <div className="text-3xl font-bold text-green-600 mb-2">
                         {loading ? '...' : (progressStats?.totalExercises || 0)}
                       </div>
-                      <div className="text-green-800 font-medium">Exercises Done</div>
-                      <div className="text-sm text-green-600">This week</div>
+                <div className="text-green-800 font-medium">Exercises Done</div>
+                <div className="text-sm text-green-600">This week</div>
                     </div>
-                  </div>
-                  
+              </div>
+              
                   <div className="group relative overflow-hidden bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl border border-purple-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform">
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative text-center">
@@ -1085,8 +1097,8 @@ function Dashboard({ setCurrentPage }) {
                       <div className="text-purple-800 font-medium">Best Score</div>
                       <div className="text-sm text-purple-600">This week</div>
                     </div>
-                  </div>
-                  
+              </div>
+              
                   <div className="group relative overflow-hidden bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl border border-orange-200/50 p-6 hover:shadow-lg transition-all duration-300 hover:scale-105 transform">
                     <div className="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-red-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <div className="relative text-center">
@@ -1096,14 +1108,14 @@ function Dashboard({ setCurrentPage }) {
                       <div className="text-3xl font-bold text-orange-600 mb-2">
                         {loading ? '...' : (progressStats?.streakDays || 0)}
                       </div>
-                      <div className="text-orange-800 font-medium">Day Streak</div>
-                      <div className="text-sm text-orange-600">🔥 Amazing!</div>
+                <div className="text-orange-800 font-medium">Day Streak</div>
+                <div className="text-sm text-orange-600">🔥 Amazing!</div>
                     </div>
                   </div>
                 </div>
               </div>
-                         </div>
-           </div>
+            </div>
+          </div>
 
            {/* Progress Summary Section */}
            <div className="max-w-6xl mx-auto mb-16">
@@ -1465,26 +1477,26 @@ function Dashboard({ setCurrentPage }) {
                Ready to Practice?
              </h3>
              <div className="flex flex-wrap justify-center gap-6">
-               <button
-                 onClick={() => setCurrentPage('exercises')}
+              <button
+                onClick={() => setCurrentPage('exercises')}
                  className="group bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-8 py-4 rounded-2xl font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
-               >
+              >
                  <span className="flex items-center space-x-2">
                    <Play className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                    <span>Start Exercise</span>
                  </span>
-               </button>
-               <button
-                 onClick={() => setCurrentPage('progress')}
+              </button>
+              <button
+                onClick={() => setCurrentPage('progress')}
                  className="group bg-white text-slate-700 px-8 py-4 rounded-2xl font-semibold border-2 border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
-               >
+              >
                  <span className="flex items-center space-x-2">
                    <TrendingUp className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                    <span>View Progress</span>
                  </span>
-               </button>
-             </div>
-           </div>
+              </button>
+            </div>
+          </div>
         </main>
       </div>
     </div>

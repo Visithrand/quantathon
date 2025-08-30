@@ -57,11 +57,11 @@ const Home = () => {
       gradient: 'from-green-500 to-emerald-500'
     },
     { 
-      id: 'pronunciation-games', 
+              id: 'games', 
       name: 'Pronunciation Games', 
       icon: <Infinity className="w-5 h-5" />, 
       active: false, 
-      path: '/pronunciation-games',
+              path: '/games',
       description: 'Fun games to improve pronunciation and articulation',
       gradient: 'from-orange-500 to-red-500'
     },
@@ -157,10 +157,10 @@ const Home = () => {
                 <span className="text-xs text-green-300">Online</span>
               </div>
             </div>
-          </div>
-          
+        </div>
+
           {/* Enhanced Logout Button */}
-          <button 
+            <button
             onClick={logout}
             className="w-full group relative overflow-hidden bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 transform"
           >
@@ -239,18 +239,18 @@ const Home = () => {
             <div className="absolute inset-0 -z-10">
               <div className="absolute top-0 left-1/4 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
               <div className="absolute top-0 right-1/4 w-24 h-24 bg-gradient-to-r from-purple-400/20 to-pink-400/20 rounded-full blur-3xl"></div>
-            </div>
+              </div>
             
             <div className="inline-flex items-center space-x-3 mb-6 bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-full shadow-lg">
               <Sparkles className="w-5 h-5 animate-pulse" />
               <span className="text-sm font-medium">AI-Powered Speech Therapy</span>
-            </div>
+          </div>
             
             <h1 className="text-6xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-6 leading-tight">
               Welcome back, {user?.name || 'User'}!
             </h1>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-              Every day you practice, you're building communication skills that will benefit you for a lifetime. 
+              Every day you practice, you're building communication skills that will benefit you for a lifetime.
               <span className="text-blue-600 font-semibold"> Let's make today count!</span>
             </p>
           </div>
@@ -262,8 +262,8 @@ const Home = () => {
               <div className="relative bg-white rounded-3xl shadow-2xl p-12 text-center border border-slate-200/50 backdrop-blur-sm">
                 <div className="text-8xl text-gradient-to-b from-blue-400 to-cyan-500 mb-8 font-serif">"</div>
                 <p className="text-3xl italic text-slate-800 mb-8 leading-relaxed font-light">
-                  Your voice matters. Every word you speak brings you closer to confident communication.
-                </p>
+                Your voice matters. Every word you speak brings you closer to confident communication.
+              </p>
                 <div className="flex items-center justify-center space-x-3">
                   <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center shadow-lg">
                     <Mic className="w-6 h-6 text-white" />
@@ -281,7 +281,7 @@ const Home = () => {
           <div className="mb-20">
             <div className="text-center mb-16">
               <h2 className="text-5xl font-bold bg-gradient-to-r from-slate-800 via-blue-800 to-indigo-800 bg-clip-text text-transparent mb-6">
-                Why Your Practice Matters
+              Why Your Practice Matters
               </h2>
               <p className="text-xl text-slate-600 max-w-3xl mx-auto">
                 Discover the transformative impact of consistent speech therapy practice
@@ -303,9 +303,9 @@ const Home = () => {
                   <div className="relative p-8">
                     <div className={`w-20 h-20 bg-gradient-to-br ${card.bgGradient} rounded-2xl flex items-center justify-center mx-auto mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg`}>
                       <div className={`text-gradient-to-br ${card.gradient}`}>
-                        {card.icon}
-                      </div>
+                      {card.icon}
                     </div>
+                  </div>
                     <h3 className="text-2xl font-bold text-slate-800 mb-4 text-center">{card.title}</h3>
                     <p className="text-slate-600 leading-relaxed text-center">{card.description}</p>
                   </div>

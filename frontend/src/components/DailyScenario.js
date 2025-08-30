@@ -30,23 +30,26 @@ const DailyScenario = () => {
   const [apiKey, setApiKey] = useState('');
   const [showApiKeyModal, setShowApiKeyModal] = useState(false);
   const [conversationAnalysis, setConversationAnalysis] = useState(null);
+  const API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
 
-  // Load saved API key on component mount
+    // Load saved API key on component mount
   useEffect(() => {
     const savedApiKey = localStorage.getItem('openai_api_key');
     if (savedApiKey) {
       setApiKey(savedApiKey);
-      // Also set it in the conversation service
       conversationService.setApiKey(savedApiKey);
     } else {
-      // Set default API key if none is saved
-      const defaultApiKey = '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';
-      setApiKey(defaultApiKey);
-      localStorage.setItem('openai_api_key', defaultApiKey);
-      // Set it in the conversation service
-      conversationService.setApiKey(defaultApiKey);
+      if (API_KEY) {
+        setApiKey(API_KEY);
+        localStorage.setItem('openai_api_key', API_KEY);
+        conversationService.setApiKey(API_KEY);
+      } else {
+        // Show modal asking user to enter their API key
+        setShowApiKeyModal(true);
+      }
     }
   }, []);
+
 
   // Handle back navigation
   const handleGoBack = () => {
